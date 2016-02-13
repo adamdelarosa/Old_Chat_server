@@ -48,26 +48,26 @@
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="600.0" maxWidth="1200.0" minHeight="600.0" minWidth="1200.0" prefHeight="600.0" prefWidth="1200.0" VBox.vgrow="ALWAYS">
          <children>
-            <TextField fx:id="serverChatField" layoutX="312.0" layoutY="337.0" prefHeight="26.0" prefWidth="200.0" />
-            <TextArea fx:id="serverChatArea" layoutX="312.0" layoutY="32.0" prefHeight="297.0" prefWidth="200.0" />
-            <Button layoutX="515.0" layoutY="337.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="115.0" text="Send" />
+            <TextField fx:id="serverChatField" layoutX="881.0" layoutY="553.0" prefHeight="26.0" prefWidth="200.0" />
+            <TextArea fx:id="serverChatArea" layoutX="881.0" layoutY="51.0" prefHeight="499.0" prefWidth="312.0" />
+            <Button layoutX="1090.0" layoutY="553.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="103.0" text="Send" />
             <Text layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SERVER" wrappingWidth="56.0">
                <font>
                   <Font name="Avenir Medium" size="13.0" />
                </font>
             </Text>
-            <ScrollPane layoutX="517.0" layoutY="32.0" prefHeight="297.0" prefWidth="115.0">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="296.0" prefWidth="110.0" />
-              </content>
+            <ScrollPane layoutX="705.0" layoutY="51.0" prefHeight="527.0" prefWidth="170.0">
+               <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="533.0" prefWidth="161.0" />
+               </content>
             </ScrollPane>
             <Text layoutX="14.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Connections status:" />
-            <Text fx:id="onlineOffline" fill="RED" layoutX="143.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Offline" wrappingWidth="70.345703125" />
-            <Button layoutX="14.0" layoutY="337.0" mnemonicParsing="false" onAction="#connectToClient" prefHeight="26.0" prefWidth="287.0" text="Connect" />
-            <Text layoutX="517.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Users:" />
-            <Text layoutX="312.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chat Window:" />
+            <Button layoutX="14.0" layoutY="553.0" mnemonicParsing="false" onAction="#connectToClient" prefHeight="26.0" prefWidth="675.0" text="Connect" />
+            <Text layoutX="705.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Users:" />
+            <Text layoutX="881.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chat Window:" />
+            <Label fx:id="onlineOffline" layoutX="143.0" layoutY="51.0" text="Offline" textFill="RED" />
          </children>
     </AnchorPane>
   </children>

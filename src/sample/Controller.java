@@ -3,7 +3,7 @@ package sample;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import java.awt.*;
+import javafx.scene.control.TextField;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -13,9 +13,9 @@ import java.net.Socket;
 public class Controller {
 
 
-    @FXML private Label onlineOffline;
-    @FXML private TextArea serverChatArea;
-    @FXML private TextField serverChatField;
+    @FXML public Label onlineOffline;
+    @FXML public TextArea serverChatArea;
+    @FXML public TextField serverChatField;
     private DataOutputStream sendToClient;
     private DataInputStream getFromClient;
     private ServerSocket serverState;
@@ -26,7 +26,7 @@ public class Controller {
     public void connectToClient(){
         try {
             serverState = new ServerSocket(port,numberOfConnetions);
-            waitingForConnection();
+           // waitingForConnection();
             setSteams();
         }catch (IOException ioexception){
             serverChatArea.appendText("IOException - Server connection error.");
