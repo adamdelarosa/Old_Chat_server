@@ -61,6 +61,7 @@ public class Controller implements Runnable {
         runCheckConnection.start();
     }
 
+
     private void waitingForConnection() throws IOException {
         serverChatArea.appendText("Waiting for connection...");
         serverSocketConnectionStatus = serverSocketState.accept();
