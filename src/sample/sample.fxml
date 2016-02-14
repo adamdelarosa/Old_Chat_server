@@ -53,21 +53,27 @@
             <TextField fx:id="serverChatField" layoutX="881.0" layoutY="553.0" prefHeight="26.0" prefWidth="200.0" />
             <TextArea fx:id="serverChatArea" layoutX="881.0" layoutY="51.0" prefHeight="499.0" prefWidth="312.0" />
             <Button layoutX="1090.0" layoutY="553.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="103.0" text="Send" />
-            <Text layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SERVER" wrappingWidth="56.0">
-               <font>
-                  <Font name="Avenir Medium" size="13.0" />
-               </font>
-            </Text>
             <ScrollPane layoutX="705.0" layoutY="51.0" prefHeight="527.0" prefWidth="170.0">
                <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="533.0" prefWidth="161.0" />
                </content>
             </ScrollPane>
-            <Text layoutX="14.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Connections status:" />
+            <Text layoutX="15.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Connect To Client :" />
             <Button layoutX="14.0" layoutY="553.0" mnemonicParsing="false" onAction="#connectToClient" prefHeight="26.0" prefWidth="675.0" text="Connect" />
             <Text layoutX="705.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Users:" />
             <Text layoutX="881.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chat Window:" />
-            <Label fx:id="onlineOffline" layoutX="143.0" layoutY="51.0" text="Offline" textFill="RED" />
+            <Label fx:id="onlineOffline" layoutX="183.0" layoutY="87.0" text="OFFLINE" textFill="RED" />
+            <Text layoutX="15.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Waiting for connection:" />
+            <Label fx:id="onlineOffline1" layoutX="182.0" layoutY="112.0" text="OFFLINE" textFill="RED" />
+            <Text layoutX="14.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Server" wrappingWidth="206.345703125">
+               <font>
+                  <Font size="41.0" />
+               </font>
+            </Text>
+            <Text layoutX="15.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Steams connection:" />
+            <Label fx:id="onlineOffline11" layoutX="183.0" layoutY="137.0" text="OFFLINE" textFill="RED" />
+            <Text layoutX="15.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Get Message:" />
+            <Label fx:id="onlineOffline111" layoutX="183.0" layoutY="162.0" text="OFFLINE" textFill="RED" />
          </children>
     </AnchorPane>
   </children>
