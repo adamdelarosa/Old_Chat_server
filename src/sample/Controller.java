@@ -15,7 +15,6 @@ public class Controller implements Runnable {
 
 
     @FXML private Label connectToClientText;
-    @FXML private Label waitingForConnection;
     @FXML private Label setSteamsText;
     @FXML private Label getFromClientText;
     @FXML public TextArea serverChatArea;
@@ -101,7 +100,7 @@ public class Controller implements Runnable {
         do {
             try {
                 String msg = getFromClient.readUTF();
-                Platform.runLater(() -> serverChatArea.appendText(msg));
+                Platform.runLater(() -> serverChatArea.appendText(msg + "\n"));
 
             } catch (EOFException eofexception){
 
