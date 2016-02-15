@@ -52,17 +52,6 @@ public class Controller implements Runnable {
         connectToClientText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
     }
 
-    private void checkConnection() {
-        Thread runCheckConnection = new Thread((() -> {
-            //while up and run
-
-        })
-        );
-        runCheckConnection.start();
-    }
-
-
-
     private void waitingForConnection() throws IOException {
         serverChatArea.appendText("Waiting for connection...");
         serverSocketConnectionStatus = serverSocketState.accept();
@@ -70,12 +59,13 @@ public class Controller implements Runnable {
     }
 
     private void setSteams() throws IOException {
-        //setSteamsText.setText("Online");
-        //setSteamsText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
         sendToClient = new DataOutputStream(serverSocketConnectionStatus.getOutputStream());
         sendToClient.flush();
         getFromClient = new DataInputStream(serverSocketConnectionStatus.getInputStream());
         serverChatArea.appendText("Steams UP.");
+
+
+
 
 
     }
@@ -103,11 +93,15 @@ public class Controller implements Runnable {
             try {
                 String msg = getFromClient.readUTF();
                 Platform.runLater(() -> serverChatArea.appendText(msg));
-               // Platform.runLater(() -> getFromClientText.setText("ONLINE"));
+
             } catch (EOFException eofexception){
 
             } catch (IOException e){e.printStackTrace();
             }
+            Platform.runLater(() -> {
+                getFromClientText.setText("ONLINE");
+                getFromClientText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
+            });
         } while (true);
     }
 }
