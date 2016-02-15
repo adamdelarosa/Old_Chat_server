@@ -103,7 +103,7 @@ public class Controller implements Runnable {
             try {
                 String msg = getFromClient.readUTF();
                 Platform.runLater(() -> serverChatArea.appendText(msg));
-                Platform.runLater(() -> getFromClientText.setText("ONLINE"));
+               // Platform.runLater(() -> getFromClientText.setText("ONLINE"));
             } catch (EOFException eofexception){
 
             } catch (IOException e){e.printStackTrace();
