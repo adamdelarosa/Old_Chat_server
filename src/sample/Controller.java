@@ -61,26 +61,14 @@ public class Controller implements Runnable {
         );
         runCheckConnection.start();
     }
-    private void whileChatting() throws IOException{
-        String message = " You are now connected! ";
-        serverChatArea.appendText(message);
-        //ableToType(true);
-        do{
-            try{
-                message = (String) getFromClient.readUTF();
-                serverChatArea.appendText("\n" + message);
-            }catch(UTFDataFormatException utfDataFormatException){
-                serverChatArea.appendText("The user has sent an unknown object!");
-            }
-        }while(!message.equals("CLIENT - END"));
-    }
+
 
 
     private void waitingForConnection() throws IOException {
         serverChatArea.appendText("Waiting for connection...");
         serverSocketConnectionStatus = serverSocketState.accept();
         serverChatArea.appendText("Connected.");
-        connectToClientText.setText("Online");
+        //connectToClientText.setText("Online");
     }
 
     private void setSteams() throws IOException {
@@ -88,7 +76,7 @@ public class Controller implements Runnable {
         sendToClient.flush();
         getFromClient = new DataInputStream(serverSocketConnectionStatus.getInputStream());
         serverChatArea.appendText("Steams UP.");
-        setSteamsText.setText("Online");
+     //   setSteamsText.setText("Online");
     }
 
     private void closeConnetion() {
@@ -114,10 +102,24 @@ public class Controller implements Runnable {
             try {
                 String msg = getFromClient.readUTF();
                 Platform.runLater(() -> serverChatArea.appendText(msg));
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (EOFException eofexception){
+
+            } catch (IOException e){e.printStackTrace();
             }
-            getFromClientText.setText("ONLINE");
+//            getFromClientText.setText("ONLINE");
         } while (true);
+    }
+    private void whileChatting() throws IOException{
+        String message = " You are now connected! ";
+        serverChatArea.appendText(message);
+        //ableToType(true);
+        do{
+            try{
+                message = (String) getFromClient.readUTF();
+                serverChatArea.appendText("\n" + message);
+            }catch(UTFDataFormatException utfDataFormatException){
+                serverChatArea.appendText("The user has sent an unknown object!");
+            }
+        }while(!message.equals("CLIENT - END"));
     }
 }
