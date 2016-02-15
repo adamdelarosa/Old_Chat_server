@@ -14,10 +14,10 @@ public class Controller implements Runnable {
 
 
 
-    @FXML public Label connectToClientText;
-    @FXML public Label waitingForConnection;
-    @FXML public Label setSteamsText;
-    @FXML public Label getFromClientText;
+    @FXML private Label connectToClientText;
+    @FXML private Label waitingForConnection;
+    @FXML private Label setSteamsText;
+    @FXML private Label getFromClientText;
     @FXML public TextArea serverChatArea;
     @FXML public TextField serverChatField;
     private DataOutputStream sendToClient;
@@ -32,12 +32,10 @@ public class Controller implements Runnable {
         Thread runAndConnectToClient = new Thread(() -> {
             try {
                 serverSocketState = new ServerSocket(port, numberOfConnetions);
-
                 while (true) {
                     try {
                         waitingForConnection();
                         setSteams();
-                        //whileChatting();
                         getMessage();
                     } catch (EOFException eofexception) {
                         serverChatArea.appendText("IOException - Server connection error.");
@@ -50,7 +48,8 @@ public class Controller implements Runnable {
             }
         });
         runAndConnectToClient.start();
-        //getMessage();
+        connectToClientText.setText("ONLINE");
+        connectToClientText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
     }
 
     private void checkConnection() {
@@ -68,15 +67,17 @@ public class Controller implements Runnable {
         serverChatArea.appendText("Waiting for connection...");
         serverSocketConnectionStatus = serverSocketState.accept();
         serverChatArea.appendText("Connected.");
-        //connectToClientText.setText("Online");
     }
 
     private void setSteams() throws IOException {
+        //setSteamsText.setText("Online");
+        //setSteamsText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
         sendToClient = new DataOutputStream(serverSocketConnectionStatus.getOutputStream());
         sendToClient.flush();
         getFromClient = new DataInputStream(serverSocketConnectionStatus.getInputStream());
         serverChatArea.appendText("Steams UP.");
-     //   setSteamsText.setText("Online");
+
+
     }
 
     private void closeConnetion() {
@@ -102,24 +103,11 @@ public class Controller implements Runnable {
             try {
                 String msg = getFromClient.readUTF();
                 Platform.runLater(() -> serverChatArea.appendText(msg));
+                Platform.runLater(() -> getFromClientText.setText("ONLINE"));
             } catch (EOFException eofexception){
 
             } catch (IOException e){e.printStackTrace();
             }
-//            getFromClientText.setText("ONLINE");
         } while (true);
-    }
-    private void whileChatting() throws IOException{
-        String message = " You are now connected! ";
-        serverChatArea.appendText(message);
-        //ableToType(true);
-        do{
-            try{
-                message = (String) getFromClient.readUTF();
-                serverChatArea.appendText("\n" + message);
-            }catch(UTFDataFormatException utfDataFormatException){
-                serverChatArea.appendText("The user has sent an unknown object!");
-            }
-        }while(!message.equals("CLIENT - END"));
     }
 }
