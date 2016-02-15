@@ -55,19 +55,16 @@ public class Controller implements Runnable {
     private void waitingForConnection() throws IOException {
         serverChatArea.appendText("Waiting for connection...");
         serverSocketConnectionStatus = serverSocketState.accept();
-        serverChatArea.appendText("Connected.");
     }
 
     private void setSteams() throws IOException {
         sendToClient = new DataOutputStream(serverSocketConnectionStatus.getOutputStream());
         sendToClient.flush();
         getFromClient = new DataInputStream(serverSocketConnectionStatus.getInputStream());
-        serverChatArea.appendText("Steams UP.");
-
-
-
-
-
+        Platform.runLater(() -> {
+            setSteamsText.setText("ONLINE");
+            setSteamsText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
+        });
     }
 
     private void closeConnetion() {
@@ -80,6 +77,18 @@ public class Controller implements Runnable {
         } catch (IOException ioexception) {
             ioexception.printStackTrace();
 
+        }
+    }
+    public void sendMessage(){
+        String messageOut = serverChatField.getText();
+        try {
+            sendToClient.writeUTF(messageOut);
+            sendToClient.flush();
+            serverChatField.setText("");
+            Platform.runLater(() -> serverChatArea.appendText("\n" + messageOut));
+            }catch (IOException e) {
+            serverChatArea.appendText("Message was not sent.");
+            e.printStackTrace();
         }
     }
 
