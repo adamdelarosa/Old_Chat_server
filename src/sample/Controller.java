@@ -56,6 +56,7 @@ public class Controller implements Runnable {
     private void checkConnection() {
         Thread runCheckConnection = new Thread((() -> {
             //while up and run
+
         })
         );
         runCheckConnection.start();
