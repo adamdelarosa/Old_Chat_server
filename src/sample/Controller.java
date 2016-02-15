@@ -6,22 +6,20 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.EOFException;
-import java.io.IOException;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Controller implements Runnable {
 
 
-    @FXML
-    public Label onlineOffline;
-    @FXML
-    public TextArea serverChatArea;
-    @FXML
-    public TextField serverChatField;
+
+    @FXML public Label connectToClientText;
+    @FXML public Label waitingForConnection;
+    @FXML public Label setSteamsText;
+    @FXML public Label getFromClientText;
+    @FXML public TextArea serverChatArea;
+    @FXML public TextField serverChatField;
     private DataOutputStream sendToClient;
     private DataInputStream getFromClient;
     private ServerSocket serverSocketState;
@@ -39,6 +37,8 @@ public class Controller implements Runnable {
                     try {
                         waitingForConnection();
                         setSteams();
+                        //whileChatting();
+                        getMessage();
                     } catch (EOFException eofexception) {
                         serverChatArea.appendText("IOException - Server connection error.");
                     } finally {
@@ -50,7 +50,7 @@ public class Controller implements Runnable {
             }
         });
         runAndConnectToClient.start();
-        getMessage();
+        //getMessage();
     }
 
     private void checkConnection() {
@@ -61,13 +61,26 @@ public class Controller implements Runnable {
         );
         runCheckConnection.start();
     }
+    private void whileChatting() throws IOException{
+        String message = " You are now connected! ";
+        serverChatArea.appendText(message);
+        //ableToType(true);
+        do{
+            try{
+                message = (String) getFromClient.readUTF();
+                serverChatArea.appendText("\n" + message);
+            }catch(UTFDataFormatException utfDataFormatException){
+                serverChatArea.appendText("The user has sent an unknown object!");
+            }
+        }while(!message.equals("CLIENT - END"));
+    }
 
 
     private void waitingForConnection() throws IOException {
         serverChatArea.appendText("Waiting for connection...");
         serverSocketConnectionStatus = serverSocketState.accept();
         serverChatArea.appendText("Connected.");
-        onlineOffline.setText("Online");
+        connectToClientText.setText("Online");
     }
 
     private void setSteams() throws IOException {
@@ -75,6 +88,7 @@ public class Controller implements Runnable {
         sendToClient.flush();
         getFromClient = new DataInputStream(serverSocketConnectionStatus.getInputStream());
         serverChatArea.appendText("Steams UP.");
+        setSteamsText.setText("Online");
     }
 
     private void closeConnetion() {
@@ -83,8 +97,10 @@ public class Controller implements Runnable {
             sendToClient.close();
             getFromClient.close();
             serverSocketState.close();
+
         } catch (IOException ioexception) {
             ioexception.printStackTrace();
+
         }
     }
 
@@ -96,11 +112,12 @@ public class Controller implements Runnable {
     public void run() {
         do {
             try {
-                String msg = getFromClient.readUTF(); // <--- freeze GUI
+                String msg = getFromClient.readUTF();
                 Platform.runLater(() -> serverChatArea.appendText(msg));
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            getFromClientText.setText("ONLINE");
         } while (true);
     }
 }
