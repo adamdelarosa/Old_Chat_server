@@ -39,8 +39,7 @@ public class Controller implements Runnable {
                         waitingForConnection();
                         setSteams();
                         getMessage();
-                        connectionStatus();
-                        System.out.print("ss");
+
                     } catch (EOFException eofexception) {
                         serverChatArea.appendText("IOException - Server connection error.");
                     } finally {
@@ -56,6 +55,13 @@ public class Controller implements Runnable {
         runAndConnectToClient.start();
         connectToClientText.setText("ONLINE");
         connectToClientText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
+        //Connection status:
+        System.out.print("ss");
+        Thread runwaitingForConnectionGui = new Thread(() ->{
+        connectionStatus();
+        });
+        runwaitingForConnectionGui.start();
+
     }
 
     private void waitingForConnection() throws IOException {
@@ -90,7 +96,7 @@ public class Controller implements Runnable {
     private  void connectionStatus(){
         runConnectionStatus = new Thread(() -> {
             while(true){
-                testConnection.setText("Running. . . ");
+                Platform.runLater(()->testConnection.setText("Running. . . "));
             }
         });
         runConnectionStatus.start();
