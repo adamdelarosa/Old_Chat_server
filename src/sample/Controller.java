@@ -33,12 +33,17 @@ public class Controller implements Runnable {
     //Connection status:
 
     public Controller(){
-        Thread runwaitingForConnectionGui = new Thread(() ->{
+        Thread runnerThread = new Thread(() ->{
             while (true) {
+                try {
                 connectionStatus();
+
+                }catch (Exception exception){
+                    exception.printStackTrace();
+                }
             }
         });
-        runwaitingForConnectionGui.start();
+        runnerThread.start();
 
     }
 
@@ -105,7 +110,6 @@ public class Controller implements Runnable {
             try {
             while(serverSocketConnectionStatus.isConnected()){
                 Platform.runLater(()->testConnection.setText("Running. . . "));
-
             }
             }catch (NullPointerException nullpointerexception){
                 nullpointerexception.printStackTrace();
