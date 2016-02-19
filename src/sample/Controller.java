@@ -30,6 +30,18 @@ public class Controller implements Runnable {
     private Thread iThread;
     private Thread runConnectionStatus;
 
+    //Connection status:
+
+    public Controller(){
+        Thread runwaitingForConnectionGui = new Thread(() ->{
+            while (true) {
+                connectionStatus();
+            }
+        });
+        runwaitingForConnectionGui.start();
+
+    }
+
     public void connectToClient() {
         Thread runAndConnectToClient = new Thread(() -> {
             try {
@@ -55,12 +67,7 @@ public class Controller implements Runnable {
         runAndConnectToClient.start();
         connectToClientText.setText("ONLINE");
         connectToClientText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
-        //Connection status:
-        System.out.print("ss");
-        Thread runwaitingForConnectionGui = new Thread(() ->{
-        connectionStatus();
-        });
-        runwaitingForConnectionGui.start();
+
 
     }
 
@@ -95,8 +102,13 @@ public class Controller implements Runnable {
 
     private  void connectionStatus(){
         runConnectionStatus = new Thread(() -> {
-            while(true){
+            try {
+            while(serverSocketConnectionStatus.isConnected()){
                 Platform.runLater(()->testConnection.setText("Running. . . "));
+
+            }
+            }catch (NullPointerException nullpointerexception){
+                nullpointerexception.printStackTrace();
             }
         });
         runConnectionStatus.start();
