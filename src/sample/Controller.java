@@ -66,6 +66,7 @@ public class Controller implements Runnable {
         });
     }
 
+@FXML
     private void closeConnetion() {
         serverChatArea.appendText("Closing connection . . .");
         try {
@@ -78,6 +79,11 @@ public class Controller implements Runnable {
 
         }
     }
+
+    private  void connectionStatus(){
+
+    }
+
     public void sendMessage(){
         String messageOut = serverChatField.getText();
         try {

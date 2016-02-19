@@ -59,7 +59,7 @@
                </content>
             </ScrollPane>
             <Text layoutX="15.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Connect To Client :" />
-            <Button layoutX="14.0" layoutY="553.0" mnemonicParsing="false" onAction="#connectToClient" prefHeight="26.0" prefWidth="550.0" text="Connect" />
+            <Button layoutX="14.0" layoutY="553.0" mnemonicParsing="false" onAction="#connectToClient" prefHeight="26.0" prefWidth="256.0" text="Connect" />
             <Text layoutX="571.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Users:" />
             <Text layoutX="779.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chat Window:" />
             <Text layoutX="14.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Server" wrappingWidth="206.345703125">
@@ -72,6 +72,7 @@
             <Text layoutX="15.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Get Message:" />
             <Label fx:id="getFromClientText" layoutX="183.0" layoutY="138.0" text="OFFLINE" textFill="RED" />
             <Label fx:id="connectToClientText" layoutX="182.0" layoutY="87.0" text="OFFLINE" textFill="RED" />
+            <Button layoutX="285.0" layoutY="553.0" mnemonicParsing="false" onAction="#closeConnetion" prefHeight="26.0" prefWidth="256.0" text="Disconnect" />
 
          </children>
     </AnchorPane>
