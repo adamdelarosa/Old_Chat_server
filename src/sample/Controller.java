@@ -7,6 +7,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.io.*;
+import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -17,6 +18,7 @@ public class Controller implements Runnable {
     @FXML private Label connectToClientText;
     @FXML private Label setSteamsText;
     @FXML private Label getFromClientText;
+    @FXML private Label testConnection;
     @FXML public TextArea serverChatArea;
     @FXML public TextField serverChatField;
     private DataOutputStream sendToClient;
@@ -26,6 +28,7 @@ public class Controller implements Runnable {
     private int port = 6789;
     private int numberOfConnetions = 100;
     private Thread iThread;
+    private Thread runConnectionStatus;
 
     public void connectToClient() {
         Thread runAndConnectToClient = new Thread(() -> {
@@ -36,12 +39,16 @@ public class Controller implements Runnable {
                         waitingForConnection();
                         setSteams();
                         getMessage();
+                        connectionStatus();
+                        System.out.print("ss");
                     } catch (EOFException eofexception) {
                         serverChatArea.appendText("IOException - Server connection error.");
                     } finally {
                         closeConnetion();
                     }
                 }
+            } catch (BindException bindexception){
+                serverChatArea.appendText("\n Already connected.");
             } catch (IOException ioexception) {
                 ioexception.printStackTrace();
             }
@@ -81,7 +88,12 @@ public class Controller implements Runnable {
     }
 
     private  void connectionStatus(){
-
+        runConnectionStatus = new Thread(() -> {
+            while(true){
+                testConnection.setText("Running. . . ");
+            }
+        });
+        runConnectionStatus.start();
     }
 
     public void sendMessage(){
