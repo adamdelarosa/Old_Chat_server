@@ -118,6 +118,7 @@ public class Controller implements Runnable {
         runConnectionStatus.start();
     }
 
+
     public void sendMessage(){
         String messageOut = serverChatField.getText();
         try {
