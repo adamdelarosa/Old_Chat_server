@@ -33,7 +33,7 @@ public class Controller implements Runnable {
     //Connection status:
 
     public Controller() {
-        connectionStatus();
+        //connectionStatus();
     }
 
     public void connectToClient() {
@@ -94,21 +94,22 @@ public class Controller implements Runnable {
         }
     }
 
-    private  void connectionStatus(){
+ /*   private  void connectionStatus(){
+
         runConnectionStatus = new Thread(() -> {
             while(true) {
                 try {
                     while (serverSocketConnectionStatus.isConnected()) {
-                        Platform.runLater(() -> testConnection.setText("Running. . . "));
+                   //     Platform.runLater(() -> testConnection.setText("Running. . . "));
                     }
                 } catch (NullPointerException nullpointerexception) {
-                    // nullpointerexception.printStackTrace();
+                     nullpointerexception.printStackTrace();
                 }
             }
         });
         runConnectionStatus.start();
     }
-
+*/
 
     public void sendMessage(){
         String messageOut = serverChatField.getText();
@@ -144,4 +145,5 @@ public class Controller implements Runnable {
             });
         } while (true);
     }
+
 }
