@@ -28,12 +28,11 @@ public class Controller implements Runnable {
     private int port = 6789;
     private int numberOfConnetions = 100;
     private Thread iThread;
-    private Thread runConnectionStatus;
 
     //Connection status:
 
     public Controller() {
-        //connectionStatus();
+        connectToClient();
     }
 
     public void connectToClient() {
@@ -66,8 +65,8 @@ public class Controller implements Runnable {
     }
 
     private void waitingForConnection() throws IOException {
-        serverChatArea.appendText("Waiting for connection...");
         serverSocketConnectionStatus = serverSocketState.accept();
+        serverChatArea.appendText("Waiting for connection...");
     }
 
     private void setSteams() throws IOException {
@@ -75,6 +74,7 @@ public class Controller implements Runnable {
         sendToClient.flush();
         getFromClient = new DataInputStream(serverSocketConnectionStatus.getInputStream());
         Platform.runLater(() -> {
+            serverChatArea.appendText("Client connected.");
             setSteamsText.setText("ONLINE");
             setSteamsText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
         });
