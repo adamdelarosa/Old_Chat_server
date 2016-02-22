@@ -10,6 +10,7 @@ import java.io.*;
 import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 
 public class Controller implements Runnable {
 
@@ -28,6 +29,7 @@ public class Controller implements Runnable {
     private int port = 6789;
     private int numberOfConnetions = 100;
     private Thread iThread;
+    private boolean getFromClientSwitch;
 
     //Connection status:
 
@@ -38,32 +40,35 @@ public class Controller implements Runnable {
     }
 
     public void connectToClient() {
-        Thread runAndConnectToClient = new Thread(() -> {
-            try {
-                serverSocketState = new ServerSocket(port, numberOfConnetions);
-                while (true) {
-                    try {
-                        waitingForConnection();
-                        setSteams();
-                        getMessage();
+        if(!getFromClientSwitch || serverSocketConnectionStatus.isConnected()) {
+            Thread runAndConnectToClient = new Thread(() -> {
+                try {
+                    serverSocketState = new ServerSocket(port, numberOfConnetions);
+                    while (true) {
+                        try {
+                            waitingForConnection();
+                            setSteams();
+                            getMessage();
 
-                    } catch (EOFException eofexception) {
-                        serverChatArea.appendText("IOException - Server connection error.");
-                    } finally {
-                        closeConnetion();
+                        } catch (EOFException eofexception) {
+                            serverChatArea.appendText("IOException - Server connection error.");
+                        } finally {
+                            closeConnetion();
+                        }
                     }
+                } catch (BindException bindexception) {
+                    serverChatArea.appendText("\n Already connected.");
+                } catch (IOException ioexception) {
+                    ioexception.printStackTrace();
                 }
-            } catch (BindException bindexception){
-                serverChatArea.appendText("\n Already connected.");
-            } catch (IOException ioexception) {
-                ioexception.printStackTrace();
-            }
-        });
-        runAndConnectToClient.start();
-        connectToClientText.setText("ONLINE");
-        connectToClientText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
+            });
+            runAndConnectToClient.start();
+            connectToClientText.setText("ONLINE");
+            connectToClientText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
 
-
+        }else {
+            serverChatArea.appendText("\n Already connected.");
+        }
     }
 
     private void waitingForConnection() throws IOException {
@@ -86,15 +91,14 @@ public class Controller implements Runnable {
     private void closeConnetion() {
         serverChatArea.appendText("Closing connection . . .");
         try {
+            getFromClientSwitch = true;
             sendToClient.close();
             getFromClient.close();
             serverSocketState.close();
-
         } catch (IOException ioexception) {
             ioexception.printStackTrace();
-
         }
-    }
+}
 
  /*   private  void connectionStatus(){
 
@@ -114,6 +118,7 @@ public class Controller implements Runnable {
 */
 
     public void sendMessage(){
+        System.out.print(getFromClientSwitch);
         String messageOut = serverChatField.getText();
         try {
             sendToClient.writeUTF(messageOut);
@@ -145,7 +150,7 @@ public class Controller implements Runnable {
                 getFromClientText.setText("ONLINE");
                 getFromClientText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
             });
-        } while (true);
+        } while (!getFromClientSwitch);
     }
 
 }
