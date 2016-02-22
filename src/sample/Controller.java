@@ -32,7 +32,9 @@ public class Controller implements Runnable {
     //Connection status:
 
     public Controller() {
-        connectToClient();
+       Platform.runLater(()->{
+           connectToClient();
+       });
     }
 
     public void connectToClient() {
