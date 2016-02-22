@@ -51,7 +51,7 @@ public class Controller implements Runnable {
                             getMessage();
 
                         } catch (EOFException eofexception) {
-                            serverChatArea.appendText("IOException - Server connection error.");
+                            serverChatArea.appendText("\nIOException - Server connection error.");
                         } finally {
                             closeConnetion();
                         }
@@ -73,7 +73,7 @@ public class Controller implements Runnable {
 
     private void waitingForConnection() throws IOException {
         serverSocketConnectionStatus = serverSocketState.accept();
-        serverChatArea.appendText("Waiting for connection...");
+        serverChatArea.appendText("\nWaiting for connection...");
     }
 
     private void setSteams() throws IOException {
@@ -81,7 +81,7 @@ public class Controller implements Runnable {
         sendToClient.flush();
         getFromClient = new DataInputStream(serverSocketConnectionStatus.getInputStream());
         Platform.runLater(() -> {
-            serverChatArea.appendText("Client connected.");
+            serverChatArea.appendText("\nClient connected.");
             setSteamsText.setText("ONLINE");
             setSteamsText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
         });
@@ -89,7 +89,7 @@ public class Controller implements Runnable {
 
 @FXML
     private void closeConnetion() {
-        serverChatArea.appendText("Closing connection . . .");
+        serverChatArea.appendText("\nClosing connection . . .");
         try {
             getFromClientSwitch = true;
             sendToClient.close();
@@ -126,7 +126,7 @@ public class Controller implements Runnable {
             serverChatField.setText("");
             Platform.runLater(() -> serverChatArea.appendText("\n" + messageOut));
             }catch (IOException e) {
-            serverChatArea.appendText("Message was not sent.");
+            serverChatArea.appendText("\nMessage was not sent.");
             e.printStackTrace();
         }
     }
