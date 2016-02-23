@@ -29,6 +29,7 @@ public class Controller implements Runnable {
     private int port = 6789;
     private int numberOfConnetions = 100;
     private Thread iThread;
+    private Thread runConnectionStatus;
     private boolean getFromClientSwitch;
 
     //Connection status:
@@ -36,6 +37,7 @@ public class Controller implements Runnable {
     public Controller() {
        Platform.runLater(()->{
            connectToClient();
+           connectionStatus();
        });
     }
 
@@ -100,7 +102,7 @@ public class Controller implements Runnable {
         }
 }
 
- /*   private  void connectionStatus(){
+    private  void connectionStatus(){
 
         runConnectionStatus = new Thread(() -> {
             while(true) {
@@ -115,7 +117,7 @@ public class Controller implements Runnable {
         });
         runConnectionStatus.start();
     }
-*/
+
 
     public void sendMessage(){
         System.out.print(getFromClientSwitch);
