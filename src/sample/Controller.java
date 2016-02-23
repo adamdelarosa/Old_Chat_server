@@ -5,12 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-
 import java.io.*;
 import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketException;
 
 public class Controller implements Runnable {
 
@@ -37,7 +35,7 @@ public class Controller implements Runnable {
     public Controller() {
        Platform.runLater(()->{
            connectToClient();
-           connectionStatus();
+       //    connectionStatus();
        });
     }
 
