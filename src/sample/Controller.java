@@ -91,14 +91,19 @@ public class Controller implements Runnable {
 @FXML
     private void closeConnetion() {
         serverChatArea.appendText("\nClosing connection . . .");
+            Platform.runLater(()->{
         try {
             getFromClientSwitch = true;
             sendToClient.close();
+            setSteamsText.setText("OFFLINE");
             getFromClient.close();
+            getFromClientText.setText("OFFLINE");
             serverSocketState.close();
+            connectToClientText.setText("OFFLINE");
         } catch (IOException ioexception) {
             ioexception.printStackTrace();
         }
+            });
 }
 
     private  void connectionStatus(){
