@@ -44,7 +44,7 @@ public class Controller implements Runnable {
             Thread runAndConnectToClient = new Thread(() -> {
                 try {
                     serverSocketState = new ServerSocket(port, numberOfConnetions);
-                    while (true) {
+                    while (!getFromClientSwitch) {
                         try {
                             waitingForConnection();
                             setSteams();
@@ -67,6 +67,7 @@ public class Controller implements Runnable {
             connectToClientText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
 
         }else {
+            closeConnetion();
             serverChatArea.appendText("\n Already connected.");
         }
     }
@@ -118,7 +119,6 @@ public class Controller implements Runnable {
 
 
     public void sendMessage(){
-        System.out.print(getFromClientSwitch);
         String messageOut = serverChatField.getText();
         try {
             sendToClient.writeUTF(messageOut);
