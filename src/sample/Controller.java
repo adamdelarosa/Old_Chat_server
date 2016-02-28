@@ -40,7 +40,7 @@ public class Controller implements Runnable {
     }
 
     public void connectToClient() {
-        if(!getFromClientSwitch || serverSocketConnectionStatus.isConnected()) {
+        if(!getFromClientSwitch) {
             Thread runAndConnectToClient = new Thread(() -> {
                 try {
                     serverSocketState = new ServerSocket(port, numberOfConnetions);
