@@ -40,13 +40,14 @@ public class Controller implements Runnable {
     }
 
     public void connectToClient() {
-        if(!getFromClientSwitch) {
+
             Thread runAndConnectToClient = new Thread(() -> {
                 try {
                     serverSocketState = new ServerSocket(port, numberOfConnetions);
                     while (!getFromClientSwitch) {
                         try {
                             waitingForConnection();
+                            System.out.print("connectTo");
                             setSteams();
                             getMessage();
 
@@ -65,11 +66,6 @@ public class Controller implements Runnable {
             runAndConnectToClient.start();
             connectToClientText.setText("ONLINE");
             connectToClientText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
-
-        }else{
-            closeConnection();
-            serverChatArea.appendText("\n Already connected.");
-        }
     }
 
     private void waitingForConnection() throws IOException {
@@ -81,17 +77,19 @@ public class Controller implements Runnable {
         sendToClient = new DataOutputStream(serverSocketConnectionStatus.getOutputStream());
         sendToClient.flush();
         getFromClient = new DataInputStream(serverSocketConnectionStatus.getInputStream());
+
         Platform.runLater(() -> {
             serverChatArea.appendText("\nClient connected.");
             setSteamsText.setText("ONLINE");
             setSteamsText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
         });
+
     }
 
 @FXML
     public void closeConnection() {
-        serverChatArea.appendText("\nClosing connection . . .");
             Platform.runLater(()->{
+        serverChatArea.appendText("\nClosing connection . . .");
         try {
             getFromClientSwitch = true;
             sendToClient.close();
@@ -112,7 +110,7 @@ public class Controller implements Runnable {
             while(true) {
                 try {
                     while (serverSocketConnectionStatus.isConnected()) {
-                   //     Platform.runLater(() -> testConnection.setText("Running. . . "));
+                        Platform.runLater(() -> testConnection.setText("Running. . . "));
                     }
                 } catch (NullPointerException nullpointerexception) {
                      nullpointerexception.printStackTrace();
@@ -145,7 +143,10 @@ public class Controller implements Runnable {
         do {
             try {
                 String msg = getFromClient.readUTF();
-                Platform.runLater(() -> serverChatArea.appendText(msg + "\n"));
+                Platform.runLater(() ->  { serverChatArea.appendText(msg + "\n");
+            });
+
+
 
             } catch (EOFException eofexception){
 
