@@ -34,7 +34,7 @@ public class Controller implements Runnable {
 
     public Controller() {
        Platform.runLater(()->{
-           connectToClient();
+        //   connectToClient();
        //    connectionStatus();
        });
     }
@@ -66,7 +66,7 @@ public class Controller implements Runnable {
             connectToClientText.setText("ONLINE");
             connectToClientText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
 
-        }else {
+        }else{
             closeConnection();
             serverChatArea.appendText("\n Already connected.");
         }
