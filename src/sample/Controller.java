@@ -53,7 +53,7 @@ public class Controller implements Runnable {
                         } catch (EOFException eofexception) {
                             serverChatArea.appendText("\nIOException - Server connection error.");
                         } finally {
-                            closeConnetion();
+                            closeConnection();
                         }
                     }
                 } catch (BindException bindexception) {
@@ -67,7 +67,7 @@ public class Controller implements Runnable {
             connectToClientText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
 
         }else {
-            closeConnetion();
+            closeConnection();
             serverChatArea.appendText("\n Already connected.");
         }
     }
@@ -89,7 +89,7 @@ public class Controller implements Runnable {
     }
 
 @FXML
-    private void closeConnetion() {
+    public void closeConnection() {
         serverChatArea.appendText("\nClosing connection . . .");
             Platform.runLater(()->{
         try {
