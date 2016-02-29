@@ -20,11 +20,11 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
     }
-/*
+
     public void stop(){
         controller.closeConnection();
         Platform.exit();
-    }*/
+    }
 
 
     public static void main(String[] args) {
