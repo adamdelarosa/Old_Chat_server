@@ -110,7 +110,7 @@ public class Controller implements Runnable {
     }
 }
 
-    private  void connectionStatus(){
+    public void connectionStatus(){
 
         runConnectionStatus = new Thread(() -> {
             while (true){}
