@@ -33,10 +33,10 @@ public class Controller implements Runnable {
     //Connection status:
 
     public Controller() {
-       Platform.runLater(()->{
+       //Platform.runLater(()->{
         //   connectToClient();
        //    connectionStatus();
-       });
+     //  });
     }
 
     public void connectToClient() {
@@ -75,6 +75,7 @@ public class Controller implements Runnable {
 
     private void setSteams() throws IOException {
         sendToClient = new DataOutputStream(serverSocketConnectionStatus.getOutputStream());
+
         sendToClient.flush();
         getFromClient = new DataInputStream(serverSocketConnectionStatus.getInputStream());
 
@@ -88,34 +89,32 @@ public class Controller implements Runnable {
 
 @FXML
     public void closeConnection() {
-            Platform.runLater(()->{
-        serverChatArea.appendText("\nClosing connection . . .");
-        try {
-            getFromClientSwitch = true;
-            sendToClient.close();
-            setSteamsText.setText("OFFLINE");
-            getFromClient.close();
-            getFromClientText.setText("OFFLINE");
-            serverSocketState.close();
-            connectToClientText.setText("OFFLINE");
-        } catch (IOException ioexception) {
-            ioexception.printStackTrace();
-        }
-            });
+    //need to return tof to work.
+    if(1>2) {
+        Platform.runLater(() -> {
+            serverChatArea.appendText("\nClosing connection . . .");
+            try {
+                getFromClientSwitch = true;
+                sendToClient.close();
+                setSteamsText.setText("OFFLINE");
+                getFromClient.close();
+                getFromClientText.setText("OFFLINE");
+                serverSocketState.close();
+                connectToClientText.setText("OFFLINE");
+            } catch (IOException ioexception) {
+                ioexception.printStackTrace();
+            }
+        });
+    }else{
+        System.out.println("NO CONNECTION.");
+    }
 }
 
     private  void connectionStatus(){
 
         runConnectionStatus = new Thread(() -> {
-            while(true) {
-                try {
-                    while (serverSocketConnectionStatus.isConnected()) {
-                        Platform.runLater(() -> testConnection.setText("Running. . . "));
-                    }
-                } catch (NullPointerException nullpointerexception) {
-                     nullpointerexception.printStackTrace();
-                }
-            }
+            while (true){}
+
         });
         runConnectionStatus.start();
     }
