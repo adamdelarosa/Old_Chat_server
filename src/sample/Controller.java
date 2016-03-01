@@ -23,7 +23,7 @@ public class Controller implements Runnable {
     private DataOutputStream sendToClient;
     private DataInputStream getFromClient;
     private ServerSocket serverSocketState;
-    private Socket serverSocketConnectionStatus;
+    private Socket socketConnectionStatus;
     private int port = 6789;
     private int numberOfConnetions = 100;
     private Thread iThread;
@@ -69,15 +69,15 @@ public class Controller implements Runnable {
     }
 
     private void waitingForConnection() throws IOException {
-        serverSocketConnectionStatus = serverSocketState.accept();
+        socketConnectionStatus = serverSocketState.accept();
         serverChatArea.appendText("\nWaiting for connection...");
     }
 
     private void setSteams() throws IOException {
-        sendToClient = new DataOutputStream(serverSocketConnectionStatus.getOutputStream());
+        sendToClient = new DataOutputStream(socketConnectionStatus.getOutputStream());
 
         sendToClient.flush();
-        getFromClient = new DataInputStream(serverSocketConnectionStatus.getInputStream());
+        getFromClient = new DataInputStream(socketConnectionStatus.getInputStream());
 
         Platform.runLater(() -> {
             serverChatArea.appendText("\nClient connected.");
@@ -113,7 +113,15 @@ public class Controller implements Runnable {
     public void connectionStatus(){
 
         runConnectionStatus = new Thread(() -> {
-            while (true){}
+            while (true){
+                Platform.runLater(()->{
+
+                    if(true);
+                    /*if(ssocketConnectionStatus.isConnected()){
+                        System.out.println("ssocketConnectionStatus - IS CONNECTED.");
+                    }*/
+                });
+            }
 
         });
         runConnectionStatus.start();
