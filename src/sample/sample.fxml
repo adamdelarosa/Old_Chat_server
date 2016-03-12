@@ -73,7 +73,7 @@
             <Label fx:id="getFromClientText" layoutX="183.0" layoutY="138.0" text="OFFLINE" textFill="RED" />
             <Label fx:id="connectToClientText" layoutX="182.0" layoutY="87.0" text="OFFLINE" textFill="RED" />
             <Button layoutX="285.0" layoutY="553.0" mnemonicParsing="false" onAction="#closeConnection" prefHeight="26.0" prefWidth="256.0" text="Disconnect" />
-            <Label fx:id="testConnection" layoutX="142.0" layoutY="187.0" text="Test" />
+            <Label fx:id="testConnection" layoutX="56.0" layoutY="49.0" prefHeight="26.0" prefWidth="448.0" text="Test" />
             <Button layoutX="13.0" layoutY="518.0" mnemonicParsing="false" onAction="#connectionStatus" prefHeight="26.0" prefWidth="256.0" text="Connection Status Check" />
 
          </children>

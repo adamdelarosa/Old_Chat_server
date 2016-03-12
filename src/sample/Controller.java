@@ -12,8 +12,6 @@ import java.net.Socket;
 
 public class Controller implements Runnable {
 
-
-
     @FXML private Label connectToClientText;
     @FXML private Label setSteamsText;
     @FXML private Label getFromClientText;
@@ -29,8 +27,6 @@ public class Controller implements Runnable {
     private Thread iThread;
     private Thread runConnectionStatus;
     private boolean getFromClientSwitch;
-
-    //Connection status:
 
     public Controller() {
        //Platform.runLater(()->{
@@ -50,7 +46,6 @@ public class Controller implements Runnable {
                             System.out.print("connectTo");
                             setSteams();
                             getMessage();
-
                         } catch (EOFException eofexception) {
                             serverChatArea.appendText("\nIOException - Server connection error.");
                         } finally {
@@ -75,10 +70,8 @@ public class Controller implements Runnable {
 
     private void setSteams() throws IOException {
         sendToClient = new DataOutputStream(socketConnectionStatus.getOutputStream());
-
         sendToClient.flush();
         getFromClient = new DataInputStream(socketConnectionStatus.getInputStream());
-
         Platform.runLater(() -> {
             serverChatArea.appendText("\nClient connected.");
             setSteamsText.setText("ONLINE");
@@ -115,14 +108,23 @@ public class Controller implements Runnable {
         runConnectionStatus = new Thread(() -> {
             while (true){
                 Platform.runLater(()->{
-
-                    if(true);
-                    /*if(ssocketConnectionStatus.isConnected()){
-                        System.out.println("ssocketConnectionStatus - IS CONNECTED.");
-                    }*/
+                    if(socketConnectionStatus.isConnected()){
+                        //testConnection.setText("socketConnectionStatus - IS CONNECTED.");
+                        System.out.println("IS CONNECTED");
+                            Platform.runLater(()-> {
+                        try {
+                                runConnectionStatus.sleep(1000);
+                                System.out.println("STATUS");
+                                runConnectionStatus.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                            });
+                    }else{
+                        //testConnection.setText("socketConnectionStatus - NO CONNECTION.");
+                    }
                 });
             }
-
         });
         runConnectionStatus.start();
     }
@@ -150,13 +152,9 @@ public class Controller implements Runnable {
         do {
             try {
                 String msg = getFromClient.readUTF();
-                Platform.runLater(() ->  { serverChatArea.appendText(msg + "\n");
-            });
-
-
+                Platform.runLater(() -> serverChatArea.appendText(msg + "\n"));
 
             } catch (EOFException eofexception){
-
             } catch (IOException e){e.printStackTrace();
             }
             Platform.runLater(() -> {
