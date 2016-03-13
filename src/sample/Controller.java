@@ -16,7 +16,7 @@ public class Controller implements Runnable {
     @FXML private Label setSteamsText;
     @FXML private Label getFromClientText;
     @FXML private Label testConnection;
-    @FXML public TextArea serverChatArea;
+    @FXML public TextArea serverChatArea ;
     @FXML public TextField serverChatField;
     private DataOutputStream sendToClient;
     private DataInputStream getFromClient;
@@ -110,7 +110,6 @@ public class Controller implements Runnable {
                 Platform.runLater(()->{
                     if(socketConnectionStatus.isConnected()){
                         //testConnection.setText("socketConnectionStatus - IS CONNECTED.");
-                        System.out.println("IS CONNECTED");
                             Platform.runLater(()-> {
                         try {
                                 runConnectionStatus.sleep(1000);
