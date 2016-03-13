@@ -94,6 +94,7 @@ public class Controller implements Runnable {
                 getFromClientText.setText("OFFLINE");
                 serverSocketState.close();
                 connectToClientText.setText("OFFLINE");
+                System.out.println("closeConnection - DONE.");
             } catch (IOException ioexception) {
                 ioexception.printStackTrace();
             }
@@ -109,18 +110,12 @@ public class Controller implements Runnable {
             while (true){
                 Platform.runLater(()->{
                     if(socketConnectionStatus.isConnected()){
-                        //testConnection.setText("socketConnectionStatus - IS CONNECTED.");
-                            Platform.runLater(()-> {
                         try {
-                                runConnectionStatus.sleep(1000);
-                                System.out.println("STATUS");
-                                runConnectionStatus.sleep(1000);
+                            runConnectionStatus.sleep(1000);
+                                System.out.println("STATUS: Connected.");
                         } catch (InterruptedException e) {
-                            e.printStackTrace();
                         }
-                            });
                     }else{
-                        //testConnection.setText("socketConnectionStatus - NO CONNECTION.");
                     }
                 });
             }
@@ -161,6 +156,14 @@ public class Controller implements Runnable {
                 getFromClientText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
             });
         } while (!getFromClientSwitch);
+
+            while (true){
+                    if(socketConnectionStatus.isConnected()){
+                            System.out.println("STATUS: Connected.");
+                    }else{
+                    }
+            }
+
     }
 
 }
