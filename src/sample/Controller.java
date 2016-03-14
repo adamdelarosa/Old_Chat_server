@@ -35,14 +35,6 @@ public class Controller implements Runnable {
     private Thread runConnectionStatus;
     private boolean getFromClientSwitch;
 
-    public Controller() {
-        //Platform.runLater(()->{
-        //   connectToClient();
-        //    connectionStatus();
-        //  });
-    }
-
-
     public void connectToClient() {
 
         Thread runAndConnectToClient = new Thread(() -> {
@@ -91,7 +83,6 @@ public class Controller implements Runnable {
     @FXML
     public void closeConnection() {
         //need to return tof to work.
-        if (1 > 2) {
             Platform.runLater(() -> {
                 serverChatArea.appendText("\nClosing connection . . .");
                 try {
@@ -107,9 +98,9 @@ public class Controller implements Runnable {
                     ioexception.printStackTrace();
                 }
             });
-        } else {
+
             System.out.println("NO CONNECTION.");
-        }
+
     }
 
     public void connectionStatus() {
@@ -151,8 +142,10 @@ public class Controller implements Runnable {
     }
 
     public void run() {
+
         do {
             try {
+                System.out.print("He");
                 String msg = getFromClient.readUTF();
                 Platform.runLater(() -> serverChatArea.appendText(msg + "\n"));
 
@@ -165,6 +158,7 @@ public class Controller implements Runnable {
                 getFromClientText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
             });
         } while (!getFromClientSwitch);
+        System.out.println("Here.");
 
         while (true) {
             if (socketConnectionStatus.isConnected()) {
