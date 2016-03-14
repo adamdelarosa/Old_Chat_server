@@ -82,14 +82,14 @@ public class Controller implements Runnable {
 
     @FXML
     public void closeConnection() {
-        //need to return tof to work.
-
                 serverChatArea.appendText("\nClosing connection . . .");
                 try {
                     getFromClientSwitch = true;
-                    serverSocketState.close();
+
+                    if(!serverSocketState.isClosed()) {
+                        serverSocketState.close();
+                    }
                     System.out.println("closeConnection - DONE.");
-                    System.out.println("NO CONNECTION.");
                 } catch (IOException ioexception) {
                     ioexception.printStackTrace();
                 }
