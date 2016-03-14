@@ -83,23 +83,17 @@ public class Controller implements Runnable {
     @FXML
     public void closeConnection() {
         //need to return tof to work.
-            Platform.runLater(() -> {
+
                 serverChatArea.appendText("\nClosing connection . . .");
                 try {
                     getFromClientSwitch = true;
-                    sendToClient.close();
-                    setSteamsText.setText("OFFLINE");
-                    getFromClient.close();
-                    getFromClientText.setText("OFFLINE");
                     serverSocketState.close();
-                    connectToClientText.setText("OFFLINE");
                     System.out.println("closeConnection - DONE.");
+                    System.out.println("NO CONNECTION.");
                 } catch (IOException ioexception) {
                     ioexception.printStackTrace();
                 }
-            });
 
-            System.out.println("NO CONNECTION.");
 
     }
 
@@ -158,15 +152,5 @@ public class Controller implements Runnable {
                 getFromClientText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
             });
         } while (!getFromClientSwitch);
-        System.out.println("Here.");
-
-        while (true) {
-            if (socketConnectionStatus.isConnected()) {
-                System.out.println("STATUS: Connected.");
-            } else {
-            }
-        }
-
     }
-
 }
