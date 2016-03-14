@@ -61,7 +61,6 @@ public class Controller implements Runnable {
         connectToClientText.setText("ONLINE");
         connectToClientText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
     }
-
     private void waitingForConnection() throws IOException {
         socketConnectionStatus = serverSocketState.accept();
         serverChatArea.appendText("\nWaiting for connection...");
