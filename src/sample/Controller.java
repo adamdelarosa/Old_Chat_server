@@ -81,13 +81,9 @@ public class Controller implements Runnable {
 
     @FXML
     public void closeConnection() {
-                serverChatArea.appendText("\nClosing connection . . .");
                 try {
                     getFromClientSwitch = true;
-
-                    if(socketConnectionStatus.isConnected()) {
-                        serverSocketState.close();
-                    }
+                    serverSocketState.close();
                     System.out.println("closeConnection - DONE.");
                 } catch (IOException ioexception) {
                     ioexception.printStackTrace();
@@ -138,7 +134,6 @@ public class Controller implements Runnable {
 
         do {
             try {
-                System.out.print("He");
                 String msg = getFromClient.readUTF();
                 Platform.runLater(() -> serverChatArea.appendText(msg + "\n"));
 
