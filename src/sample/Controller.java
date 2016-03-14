@@ -35,6 +35,7 @@ public class Controller implements Runnable {
      //  });
     }
 
+
     public void connectToClient() {
 
             Thread runAndConnectToClient = new Thread(() -> {
