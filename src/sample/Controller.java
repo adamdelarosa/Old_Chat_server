@@ -43,7 +43,6 @@ public class Controller implements Runnable {
                 while (!getFromClientSwitch) {
                     try {
                         waitingForConnection();
-                        System.out.print("connectTo");
                         setSteams();
                         getMessage();
                     } catch (EOFException eofexception) {
@@ -86,7 +85,7 @@ public class Controller implements Runnable {
                 try {
                     getFromClientSwitch = true;
 
-                    if(!serverSocketState.isClosed()) {
+                    if(socketConnectionStatus.isConnected()) {
                         serverSocketState.close();
                     }
                     System.out.println("closeConnection - DONE.");
