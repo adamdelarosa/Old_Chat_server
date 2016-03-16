@@ -79,13 +79,15 @@ public class Controller implements Runnable {
 
     @FXML
     public void closeConnection() {
-        try {
             getFromClientSwitch = true;
-            serverSocketState.close(); // <---need to test first.
-            System.out.println("closeConnection - DONE.");
-        } catch (IOException ioexception) {
-            ioexception.printStackTrace();
-        }
+            if(!true) {
+                try {
+                    serverSocketState.close(); // <---need to test first.
+                    System.out.println("closeConnection - DONE.");
+                } catch (IOException ioexception) {
+                    ioexception.printStackTrace();
+                }
+            }
     }
 
     public void sendMessage() {
