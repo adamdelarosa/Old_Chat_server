@@ -11,7 +11,6 @@ public class ConnectionStatus implements Runnable {
 
     private Thread iconnectionRunTester;
 
-
     public void test() {
         System.out.println("here");
         iconnectionRunTester = new Thread(this);
@@ -25,6 +24,7 @@ public class ConnectionStatus implements Runnable {
                 try {
                     System.out.println("Thread id: " + iconnectionRunTester.getId());
                     iconnectionRunTester.sleep(1000);
+
                 } catch (InterruptedException interruptedException) {
                     interruptedException.printStackTrace();
                 }
