@@ -1,16 +1,5 @@
 package sample;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.application.Platform;
-import javafx.util.Duration;
-
-import java.util.Timer;
-import java.util.TimerTask;
-
-/**
- * Created by ROSA on 3/16/16.
- */
 public class ConnectionStatus implements Runnable {
 
     private boolean iconnectionRunTesterSwitch;
@@ -28,8 +17,6 @@ public class ConnectionStatus implements Runnable {
                     try {
                         System.out.println("Thread id: " + iconnectionRunTester.getId());
                         iconnectionRunTester.sleep(1000);
-
-
                     } catch (InterruptedException interruptedException) {
                         interruptedException.printStackTrace();
                     }
