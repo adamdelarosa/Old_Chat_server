@@ -128,8 +128,13 @@ public class Controller implements Runnable {
             });
         } while (!getFromClientSwitch);
     }
+    public void connectionStatus(){
+        ConnectionStatus classconnectionstatus = new ConnectionStatus();
+        classconnectionstatus.test();
+    }
 
-    public void connectionStatus() {
+
+    /*public void connectionStatus() {
         runConnectionStatus = new Thread(() -> {
             while (true) {
                 Platform.runLater(() -> {
@@ -143,5 +148,5 @@ public class Controller implements Runnable {
             }
         });
         runConnectionStatus.start();
-    }
+    }*/
 }
