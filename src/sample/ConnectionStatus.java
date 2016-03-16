@@ -13,9 +13,8 @@ import java.util.TimerTask;
  */
 public class ConnectionStatus implements Runnable {
 
+    private boolean iconnectionRunTesterSwitch;
     private Thread iconnectionRunTester;
-
-    Timer timer = new Timer();
 
     public void test() {
         System.out.println("here");
@@ -23,14 +22,8 @@ public class ConnectionStatus implements Runnable {
         iconnectionRunTester.start();
     }
 
-
-
-
-
-
-        @Override
+    @Override
     public void run() {
-
                 do {
                     try {
                         System.out.println("Thread id: " + iconnectionRunTester.getId());
@@ -40,6 +33,6 @@ public class ConnectionStatus implements Runnable {
                     } catch (InterruptedException interruptedException) {
                         interruptedException.printStackTrace();
                     }
-                } while (true);
+                } while (!iconnectionRunTesterSwitch);
         }
 }

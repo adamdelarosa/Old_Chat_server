@@ -27,7 +27,6 @@ public class Controller implements Runnable {
     private int port = 6789;
     private int numberOfConnetions = 100;
     private Thread iThread;
-    private Thread runConnectionStatus;
     private boolean getFromClientSwitch;
 
     public void connectToClient() {
