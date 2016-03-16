@@ -61,6 +61,10 @@ public class Controller implements Runnable {
         socketConnectionStatus = serverSocketState.accept();
         serverChatArea.appendText("\nWaiting for connection...");
     }
+    public void connectionStatus(){
+        ConnectionStatus classconnectionstatus = new ConnectionStatus();
+        classconnectionstatus.test();
+    }
 
     private void setSteams() throws IOException {
         sendToClient = new DataOutputStream(socketConnectionStatus.getOutputStream());
@@ -118,9 +122,5 @@ public class Controller implements Runnable {
                 getFromClientText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
             });
         } while (!getFromClientSwitch);
-    }
-    public void connectionStatus(){
-        ConnectionStatus classconnectionstatus = new ConnectionStatus();
-        classconnectionstatus.test();
     }
 }
