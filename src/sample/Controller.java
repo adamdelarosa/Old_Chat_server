@@ -13,18 +13,12 @@ import java.net.Socket;
 
 public class Controller implements Runnable {
 
-    @FXML
-    private Label connectToClientText;
-    @FXML
-    private Label setSteamsText;
-    @FXML
-    private Label getFromClientText;
-    @FXML
-    private Label testConnection;
-    @FXML
-    public TextArea serverChatArea;
-    @FXML
-    public TextField serverChatField;
+    @FXML private Label connectToClientText;
+    @FXML private Label setSteamsText;
+    @FXML private Label getFromClientText;
+    @FXML private Label testConnection;
+    @FXML public TextArea serverChatArea;
+    @FXML public TextField serverChatField;
 
     private DataOutputStream sendToClient;
     private DataInputStream getFromClient;
