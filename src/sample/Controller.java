@@ -25,6 +25,7 @@ public class Controller implements Runnable {
     public TextArea serverChatArea;
     @FXML
     public TextField serverChatField;
+
     private DataOutputStream sendToClient;
     private DataInputStream getFromClient;
     private ServerSocket serverSocketState;
@@ -76,7 +77,6 @@ public class Controller implements Runnable {
             setSteamsText.setText("ONLINE");
             setSteamsText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
         });
-
     }
 
     @FXML
