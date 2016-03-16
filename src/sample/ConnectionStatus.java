@@ -2,6 +2,8 @@ package sample;
 
 import javafx.application.Platform;
 
+import java.util.Timer;
+
 /**
  * Created by ROSA on 3/16/16.
  */
@@ -9,10 +11,11 @@ public class ConnectionStatus implements Runnable {
 
     private Thread iconnectionRunTester;
 
+
     public void test() {
         System.out.println("here");
         iconnectionRunTester = new Thread(this);
-        iconnectionRunTester.run();
+        iconnectionRunTester.start();
     }
 
 @Override
