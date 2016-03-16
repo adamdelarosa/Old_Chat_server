@@ -132,21 +132,4 @@ public class Controller implements Runnable {
         ConnectionStatus classconnectionstatus = new ConnectionStatus();
         classconnectionstatus.test();
     }
-
-
-    /*public void connectionStatus() {
-        runConnectionStatus = new Thread(() -> {
-            while (true) {
-                Platform.runLater(() -> {
-                    try {
-                        runConnectionStatus.sleep(1000);
-                        System.out.println("STATUS: Connected.");
-                        System.out.print(runConnectionStatus);
-                    } catch (InterruptedException e) {
-                    }
-                });
-            }
-        });
-        runConnectionStatus.start();
-    }*/
 }
