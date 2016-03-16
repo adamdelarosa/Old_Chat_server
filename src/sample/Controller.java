@@ -77,7 +77,6 @@ public class Controller implements Runnable {
         });
     }
 
-    @FXML
     public void closeConnection() {
         try {
             getFromClientSwitch = true;
