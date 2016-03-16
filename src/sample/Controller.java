@@ -78,7 +78,8 @@ public class Controller implements Runnable {
 
     @FXML
     public void closeConnection() {
-            getFromClientSwitch = true;
+            getFromClientSwitch = true; //<--- Kill Controller Thread
+
             if(!true) {
                 try {
                     serverSocketState.close(); // <---need to test first.
