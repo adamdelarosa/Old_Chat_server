@@ -90,21 +90,7 @@ public class Controller implements Runnable {
         }
     }
 
-    public void connectionStatus() {
 
-        runConnectionStatus = new Thread(() -> {
-            while (true) {
-                Platform.runLater(() -> {
-                        try {
-                            runConnectionStatus.sleep(1000);
-                            System.out.println("STATUS: Connected.");
-                        } catch (InterruptedException e) {
-                        }
-                });
-            }
-        });
-        runConnectionStatus.start();
-    }
 
 
     public void sendMessage() {
@@ -141,5 +127,21 @@ public class Controller implements Runnable {
                 getFromClientText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
             });
         } while (!getFromClientSwitch);
+    }
+
+    public void connectionStatus() {
+        runConnectionStatus = new Thread(() -> {
+            while (true) {
+                Platform.runLater(() -> {
+                    try {
+                        runConnectionStatus.sleep(1000);
+                        System.out.println("STATUS: Connected.");
+                        System.out.print(runConnectionStatus);
+                    } catch (InterruptedException e) {
+                    }
+                });
+            }
+        });
+        runConnectionStatus.start();
     }
 }
