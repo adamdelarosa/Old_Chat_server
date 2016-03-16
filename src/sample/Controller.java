@@ -61,6 +61,7 @@ public class Controller implements Runnable {
         connectToClientText.setText("ONLINE");
         connectToClientText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
     }
+
     private void waitingForConnection() throws IOException {
         socketConnectionStatus = serverSocketState.accept();
         serverChatArea.appendText("\nWaiting for connection...");
@@ -80,15 +81,13 @@ public class Controller implements Runnable {
 
     @FXML
     public void closeConnection() {
-                try {
-                    getFromClientSwitch = true;
-                    serverSocketState.close();
-                    System.out.println("closeConnection - DONE.");
-                } catch (IOException ioexception) {
-                    ioexception.printStackTrace();
-                }
-
-
+        try {
+            getFromClientSwitch = true;
+            serverSocketState.close();
+            System.out.println("closeConnection - DONE.");
+        } catch (IOException ioexception) {
+            ioexception.printStackTrace();
+        }
     }
 
     public void connectionStatus() {
