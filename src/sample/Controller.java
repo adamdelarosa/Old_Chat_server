@@ -95,14 +95,11 @@ public class Controller implements Runnable {
         runConnectionStatus = new Thread(() -> {
             while (true) {
                 Platform.runLater(() -> {
-                    if (socketConnectionStatus.isConnected()) {
                         try {
                             runConnectionStatus.sleep(1000);
                             System.out.println("STATUS: Connected.");
                         } catch (InterruptedException e) {
                         }
-                    } else {
-                    }
                 });
             }
         });
