@@ -81,7 +81,7 @@ public class Controller implements Runnable {
     public void closeConnection() {
         try {
             getFromClientSwitch = true;
-            serverSocketState.close();
+            serverSocketState.close(); // <---need to test first.
             System.out.println("closeConnection - DONE.");
         } catch (IOException ioexception) {
             ioexception.printStackTrace();
