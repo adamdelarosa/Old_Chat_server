@@ -90,9 +90,6 @@ public class Controller implements Runnable {
         }
     }
 
-
-
-
     public void sendMessage() {
         String messageOut = serverChatField.getText();
         try {
