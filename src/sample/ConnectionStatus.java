@@ -6,7 +6,6 @@ public class ConnectionStatus implements Runnable {
     private Thread iconnectionRunTester;
 
     public void test() {
-        System.out.println("here");
         iconnectionRunTester = new Thread(this);
         iconnectionRunTester.start();
     }
