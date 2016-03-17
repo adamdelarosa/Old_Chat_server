@@ -18,7 +18,7 @@ public class Controller implements Runnable {
     @FXML private Label getFromClientText;
     @FXML public TextArea serverChatArea;
     @FXML public TextField serverChatField;
-    boolean tof;
+    boolean tofConnectionStatus;
 
 
     private DataOutputStream sendToClient;
@@ -63,15 +63,17 @@ public class Controller implements Runnable {
         serverChatArea.appendText("\nWaiting for connection...");
     }
     public void connectionStatus(){
-        classconnectionstatus = new ConnectionStatus(false);
+        // tofConnectionStatus = !tofConnectionStatus;
+        classconnectionstatus = new ConnectionStatus(tofConnectionStatus);
         classconnectionstatus.startConnecionStatusCheck();
+        System.out.println("tofConnectionStatus");
     }
     public void connectionStatusStop(){
         classconnectionstatus.killConnecionStatusCheck();
     }
     public void testSwitch(){
-        tof = !tof;
-        System.out.println("STATE: " + tof);
+        tofConnectionStatus = !tofConnectionStatus;
+        System.out.println("STATE: " + tofConnectionStatus);
     }
 
 
