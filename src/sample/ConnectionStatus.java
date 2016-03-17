@@ -9,9 +9,6 @@ public class ConnectionStatus implements Runnable {
         iconnectionRunTester = new Thread(this);
         iconnectionRunTester.start();
     }
-    public boolean geticonnectionRunTesterSwitch(boolean iconnectionRunTesterSwitch){
-        return iconnectionRunTesterSwitch;
-    }
 
     @Override
     public void run() {

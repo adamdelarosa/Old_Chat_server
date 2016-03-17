@@ -16,7 +16,6 @@ public class Controller implements Runnable {
     @FXML private Label connectToClientText;
     @FXML private Label setSteamsText;
     @FXML private Label getFromClientText;
-    @FXML private Label testConnection;
     @FXML public TextArea serverChatArea;
     @FXML public TextField serverChatField;
 
@@ -79,7 +78,6 @@ public class Controller implements Runnable {
     @FXML
     public void closeConnection() {
             getFromClientSwitch = true; //<--- Kill Controller Thread
-
             if(!true) {
                 try {
                     serverSocketState.close(); // <---need to test first.
