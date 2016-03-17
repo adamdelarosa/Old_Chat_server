@@ -18,6 +18,8 @@ public class Controller implements Runnable {
     @FXML private Label getFromClientText;
     @FXML public TextArea serverChatArea;
     @FXML public TextField serverChatField;
+    boolean tof;
+
 
     private DataOutputStream sendToClient;
     private DataInputStream getFromClient;
@@ -66,6 +68,10 @@ public class Controller implements Runnable {
     }
     public void connectionStatusStop(){
         classconnectionstatus.killConnecionStatusCheck();
+    }
+    public void testSwitch(){
+        tof = !tof;
+        System.out.println("STATE: " + tof);
     }
 
 
