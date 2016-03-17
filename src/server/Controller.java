@@ -28,6 +28,8 @@ public class Controller implements Runnable {
     private Thread iThread;
     private boolean getFromClientSwitch;
 
+    private ConnectionStatus classconnectionstatus;
+
     public void connectToClient() {
 
         Thread runAndConnectToClient = new Thread(() -> {
@@ -59,12 +61,11 @@ public class Controller implements Runnable {
         serverChatArea.appendText("\nWaiting for connection...");
     }
     public void connectionStatus(){
-        ConnectionStatus classconnectionstatus = new ConnectionStatus();
+        classconnectionstatus = new ConnectionStatus(false);
         classconnectionstatus.startConnecionStatusCheck();
     }
     public void connectionStatusStop(){
-        ConnectionStatus classconnectionstatus = new ConnectionStatus();
-        classconnectionstatus.killConnecionStatusCheck(true);
+        classconnectionstatus.killConnecionStatusCheck();
     }
 
 

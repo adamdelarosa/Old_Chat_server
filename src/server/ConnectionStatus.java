@@ -2,8 +2,12 @@ package server;
 
 public class ConnectionStatus implements Runnable {
 
-    public boolean iconnectionRunTesterSwitch;
+    private boolean shutdown = false;
     private Thread iconnectionRunTester;
+
+    public ConnectionStatus(Boolean stopping){
+        shutdown = stopping;
+    }
 
 
 
@@ -12,20 +16,20 @@ public class ConnectionStatus implements Runnable {
         iconnectionRunTester.start();
 
     }
-    public void killConnecionStatusCheck(boolean booleanIconnectionRunTesterSwitch){
-        System.out.print(booleanIconnectionRunTesterSwitch);
-        iconnectionRunTesterSwitch = booleanIconnectionRunTesterSwitch;
+    public void killConnecionStatusCheck(){
+        shutdown = true;
     }
 
     @Override
     public void run() {
-                do {
+                while(!shutdown) {
                     try {
                         System.out.println("Thread id: " + iconnectionRunTester.getId());
                         iconnectionRunTester.sleep(1000);
+                        System.out.println(shutdown);
                     } catch (InterruptedException interruptedException) {
                         interruptedException.printStackTrace();
                     }
-                } while (!iconnectionRunTesterSwitch);
+                }
         }
 }
