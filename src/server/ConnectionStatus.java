@@ -10,7 +10,7 @@ public class ConnectionStatus implements Runnable {
     }
 
     public void startConnecionStatusCheck() {
-        if(shutdown != true){
+        if(iconnectionRunTester != null){
             return;
         }else {
             iconnectionRunTester = new Thread(this);
