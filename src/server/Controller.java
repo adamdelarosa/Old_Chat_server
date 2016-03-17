@@ -64,14 +64,7 @@ public class Controller implements Runnable {
     }
     public void connectionStatusStop(){
         ConnectionStatus classconnectionstatus = new ConnectionStatus();
-        if (classconnectionstatus.iconnectionRunTesterSwitch = true){
-             classconnectionstatus.iconnectionRunTesterSwitch = false;
-            System.out.println(classconnectionstatus.iconnectionRunTesterSwitch);
-        }else {
-            classconnectionstatus.iconnectionRunTesterSwitch = true;
-            System.out.println(classconnectionstatus.iconnectionRunTesterSwitch);
-        }
-        //classconnectionstatus.killConnecionStatusCheck(true);
+        classconnectionstatus.killConnecionStatusCheck(true);
     }
 
 
