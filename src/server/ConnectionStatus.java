@@ -9,15 +9,20 @@ public class ConnectionStatus implements Runnable {
         shutdown = stopping;
     }
 
-
-
     public void startConnecionStatusCheck() {
-        iconnectionRunTester = new Thread(this);
-        iconnectionRunTester.start();
-
+        if(shutdown == true){
+            return;
+        }else {
+            iconnectionRunTester = new Thread(this);
+            iconnectionRunTester.start();
+        }
     }
     public void killConnecionStatusCheck(){
-        shutdown = true;
+        if(iconnectionRunTester == null){
+            return;
+        }else {
+            shutdown = true;
+        }
     }
 
     @Override
@@ -26,7 +31,6 @@ public class ConnectionStatus implements Runnable {
                     try {
                         System.out.println("Thread id: " + iconnectionRunTester.getId());
                         iconnectionRunTester.sleep(1000);
-                        System.out.println(shutdown);
                     } catch (InterruptedException interruptedException) {
                         interruptedException.printStackTrace();
                     }
