@@ -54,15 +54,26 @@ public class Controller implements Runnable {
         connectToClientText.setText("ONLINE");
         connectToClientText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
     }
-
     private void waitingForConnection() throws IOException {
         socketConnectionStatus = serverSocketState.accept();
         serverChatArea.appendText("\nWaiting for connection...");
     }
     public void connectionStatus(){
         ConnectionStatus classconnectionstatus = new ConnectionStatus();
-        classconnectionstatus.test();
+        classconnectionstatus.startConnecionStatusCheck();
     }
+    public void connectionStatusStop(){
+        ConnectionStatus classconnectionstatus = new ConnectionStatus();
+        if (classconnectionstatus.iconnectionRunTesterSwitch = true){
+             classconnectionstatus.iconnectionRunTesterSwitch = false;
+            System.out.println(classconnectionstatus.iconnectionRunTesterSwitch);
+        }else {
+            classconnectionstatus.iconnectionRunTesterSwitch = true;
+            System.out.println(classconnectionstatus.iconnectionRunTesterSwitch);
+        }
+        //classconnectionstatus.killConnecionStatusCheck(true);
+    }
+
 
     private void setSteams() throws IOException {
         sendToClient = new DataOutputStream(socketConnectionStatus.getOutputStream());

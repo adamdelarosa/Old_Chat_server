@@ -75,7 +75,7 @@
             <Button layoutX="285.0" layoutY="553.0" mnemonicParsing="false" onAction="#closeConnection" prefHeight="26.0" prefWidth="256.0" text="Disconnect" />
             <Label fx:id="testConnection" layoutX="56.0" layoutY="49.0" prefHeight="26.0" prefWidth="448.0" text="Test" />
             <Button layoutX="13.0" layoutY="518.0" mnemonicParsing="false" onAction="#connectionStatus" prefHeight="26.0" prefWidth="256.0" text="Connection Status Check" />
-            <Button layoutX="285.0" layoutY="518.0" mnemonicParsing="false" onAction="#setIConnectionRunTesterSwitch" prefHeight="26.0" prefWidth="256.0" text="Connection Status Check - STOP" />
+            <Button layoutX="285.0" layoutY="518.0" mnemonicParsing="false" onAction="#connectionStatusStop" prefHeight="26.0" prefWidth="256.0" text="Connection Status Check - STOP" />
 
          </children>
     </AnchorPane>

@@ -5,9 +5,16 @@ public class ConnectionStatus implements Runnable {
     public boolean iconnectionRunTesterSwitch;
     private Thread iconnectionRunTester;
 
-    public void test() {
+
+
+    public void startConnecionStatusCheck() {
         iconnectionRunTester = new Thread(this);
         iconnectionRunTester.start();
+
+    }
+    public void killConnecionStatusCheck(boolean booleanIconnectionRunTesterSwitch){
+        System.out.print(booleanIconnectionRunTesterSwitch);
+        iconnectionRunTesterSwitch = booleanIconnectionRunTesterSwitch;
     }
 
     @Override
