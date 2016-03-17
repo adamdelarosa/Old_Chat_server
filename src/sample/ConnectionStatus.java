@@ -2,12 +2,15 @@ package sample;
 
 public class ConnectionStatus implements Runnable {
 
-    private boolean iconnectionRunTesterSwitch;
+    public boolean iconnectionRunTesterSwitch;
     private Thread iconnectionRunTester;
 
     public void test() {
         iconnectionRunTester = new Thread(this);
         iconnectionRunTester.start();
+    }
+    public boolean geticonnectionRunTesterSwitch(boolean iconnectionRunTesterSwitch){
+        return iconnectionRunTesterSwitch;
     }
 
     @Override
