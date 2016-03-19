@@ -4,6 +4,7 @@ public class ConnectionStatus implements Runnable {
 
     private boolean shutdown = false;
     private Thread iconnectionRunTester;
+    Controller controller = new Controller();
 
     public ConnectionStatus(Boolean stopping){
         shutdown = stopping;
@@ -22,6 +23,9 @@ public class ConnectionStatus implements Runnable {
             return;
         }else {
             shutdown = true;
+            long ThreadID = iconnectionRunTester.getId();
+            System.out.print("Kill: " + ThreadID);
+            iconnectionRunTester.interrupt();
         }
     }
 
