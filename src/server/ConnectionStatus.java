@@ -25,7 +25,7 @@ public class ConnectionStatus implements Runnable {
             ThreadID = iconnectionRunTester.getId();
             shutdown = true;
             iconnectionRunTester.interrupt();
-            System.out.print("Kill: " + ThreadID);
+            System.out.println("Kill: " + ThreadID + " - Connection status");
         }
     }
 
@@ -36,7 +36,7 @@ public class ConnectionStatus implements Runnable {
                         System.out.println("Thread id: " + iconnectionRunTester.getId());
                         iconnectionRunTester.sleep(1000);
                     } catch (InterruptedException interruptedException) {
-                        System.out.println("InterruptedException: thread "+ ThreadID +"(SLEEP)");
+                        System.out.println("InterruptedException: thread "+ ThreadID +"(SLEEP) - "  + "Connection status");
                     }
                 }
         }
