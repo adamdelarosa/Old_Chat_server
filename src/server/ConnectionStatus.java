@@ -14,14 +14,11 @@ public class ConnectionStatus implements Runnable {
 }
 
     public void killConnecionStatusCheck() {
-        System.out.println(threadConnectionRunTester.isAlive());
-        if (!threadConnectionRunTester.isAlive()) {
-            System.out.println(threadConnectionRunTester.isAlive());
-            System.out.println("Can't run killConnecionStatusCheck - No thread running.");
-            System.out.println("Thread status: " + "'" + threadConnectionRunTester + "'.");
-            return;
-        } else {
-            System.out.println("yooyo");
+        if (threadConnectionRunTester.isAlive()){
+            System.out.println("alive");
+        }
+            System.out.println("Dead");
+
         }
         /*if(threadConnectionRunTester.isAlive()){
            // System.out.println("Connection status: Thread " + ThreadID + " - Running.");
