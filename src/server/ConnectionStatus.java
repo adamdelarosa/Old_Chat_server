@@ -9,7 +9,6 @@ public class ConnectionStatus implements Runnable {
 
     public void startConnecionStatusCheck() {
         threadConnectionRunTester = new Thread(this);
-        threadConnectionRunTester.setName("connectionRunTester");
         threadConnectionRunTester.start();
     }
 
@@ -35,7 +34,7 @@ public class ConnectionStatus implements Runnable {
     public void run() {
         while (!shutdown) {
             try {
-                System.out.println("Thread id: " + threadConnectionRunTester.getId() + "-  '" + threadConnectionRunTester.getName() + "'.");
+                System.out.println("Thread id: " + threadConnectionRunTester.getId());
                 threadConnectionRunTester.sleep(1000);
             } catch (InterruptedException interruptedException) {
                 System.out.println("InterruptedException: thread " + ThreadID + "(SLEEP) - " + "Connection status");
