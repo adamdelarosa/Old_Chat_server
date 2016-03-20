@@ -11,7 +11,6 @@ public class ConnectionStatus implements Runnable {
     }*/
 
     public void startConnecionStatusCheck() {
-        System.out.println("Hello");
         threadConnectionRunTester = new Thread(this);
         threadConnectionRunTester.start();
     }
@@ -36,7 +35,6 @@ public class ConnectionStatus implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("sasa");
                 while(!shutdown) {
                     try {
                         System.out.println("Thread id: " + threadConnectionRunTester.getId());
