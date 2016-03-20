@@ -14,13 +14,16 @@ public class ConnectionStatus implements Runnable {
         if(threadConnectionRunTester != null){
             return;
         }else {
-            this.threadConnectionRunTester = new Thread(this);
-            this.threadConnectionRunTester.start();
+            threadConnectionRunTester = new Thread();
+            threadConnectionRunTester.start();
         }
     }
     public void killConnecionStatusCheck(){
-        if(threadConnectionRunTester == null) {
-            System.out.println("DEAD");
+        if (true) {
+
+            System.out.println("DEAD" + threadConnectionRunTester);
+
+            return;
         }
         /*if(threadConnectionRunTester.isAlive()){
            // System.out.println("Connection status: Thread " + ThreadID + " - Running.");
