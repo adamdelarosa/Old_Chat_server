@@ -62,12 +62,12 @@ public class Controller implements Runnable {
         socketState = serverSocketState.accept();
         serverChatArea.appendText("\nWaiting for connection...");
     }
-    public void connectionStatus(){
-        // tofConnectionStatus = !tofConnectionStatus;
-        classconnectionstatus = new ConnectionStatus(tofConnectionStatus);
+    public void connectionStatusStart(){
+        classconnectionstatus = new ConnectionStatus();
         classconnectionstatus.startConnecionStatusCheck();
     }
     public void connectionStatusStop(){
+        classconnectionstatus = new ConnectionStatus();
         classconnectionstatus.killConnecionStatusCheck();
     }
     public void testSwitch(){

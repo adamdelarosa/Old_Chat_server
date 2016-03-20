@@ -3,27 +3,24 @@ package server;
 public class ConnectionStatus implements Runnable {
 
     private boolean shutdown = false;
-    private Thread threadConnectionRunTester;
+    public Thread threadConnectionRunTester;
     private long ThreadID;
 
-    public ConnectionStatus(Boolean stopping){
+    /*public ConnectionStatus(Boolean stopping){
         shutdown = stopping;
-    }
+    }*/
 
     public void startConnecionStatusCheck() {
-        if(threadConnectionRunTester != null){
-            return;
-        }else {
-            threadConnectionRunTester = new Thread();
-            threadConnectionRunTester.start();
-        }
+        System.out.println("Hello");
+        threadConnectionRunTester = new Thread(this);
+        threadConnectionRunTester.start();
     }
     public void killConnecionStatusCheck(){
         if (true) {
+            System.out.print("sa");
+           // System.out.println("DEAD" + threadConnectionRunTester);
 
-            System.out.println("DEAD" + threadConnectionRunTester);
-
-            return;
+            //return;
         }
         /*if(threadConnectionRunTester.isAlive()){
            // System.out.println("Connection status: Thread " + ThreadID + " - Running.");
@@ -39,6 +36,7 @@ public class ConnectionStatus implements Runnable {
 
     @Override
     public void run() {
+        System.out.println("sasa");
                 while(!shutdown) {
                     try {
                         System.out.println("Thread id: " + threadConnectionRunTester.getId());
