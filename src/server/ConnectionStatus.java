@@ -3,21 +3,23 @@ package server;
 public class ConnectionStatus implements Runnable {
 
     private boolean shutdown = false;
-    private Thread threadConnectionRunTester = new Thread();
+    private Thread threadConnectionRunTester;
     private long ThreadID;
 
+    public ConnectionStatus() {
+        threadConnectionRunTester = new Thread(this);
+    }
 
     public void startConnecionStatusCheck() {
-        threadConnectionRunTester = new Thread(this);
+        System.out.println(threadConnectionRunTester.isAlive());
         threadConnectionRunTester.start();
+        System.out.println(threadConnectionRunTester.isAlive());
+
     }
 
     public void killConnecionStatusCheck() {
-        if (threadConnectionRunTester.isAlive()) {
-            System.out.println("alive");
-        } else {
-            System.out.println("Dead");
-        }
+
+        System.out.println(threadConnectionRunTester.getId());
         /*if(threadConnectionRunTester.isAlive()){
            // System.out.println("Connection status: Thread " + ThreadID + " - Running.");
             System.out.println("threadConnectionRunTester - run status check first.");
