@@ -63,11 +63,10 @@ public class Controller implements Runnable {
         serverChatArea.appendText("\nWaiting for connection...");
     }
     public void connectionStatusStart(){
-        classconnectionstatus = new ConnectionStatus();
+        classconnectionstatus = new ConnectionStatus(true);
         classconnectionstatus.startConnecionStatusCheck();
     }
     public void connectionStatusStop(){
-        classconnectionstatus = new ConnectionStatus();
         classconnectionstatus.killConnecionStatusCheck();
     }
     public void testSwitch(){
