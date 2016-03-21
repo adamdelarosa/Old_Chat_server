@@ -4,24 +4,28 @@ public class ConnectionStatus implements Runnable {
 
     private boolean shutdown = false;
     private Thread threadConnectionRunTester;
-    private long ThreadID;
+    private long threadID;
 
     public ConnectionStatus() {
-        threadConnectionRunTester = new Thread(this);
     }
 
     public void startConnecionStatusCheck() {
-        System.out.println(threadConnectionRunTester.isAlive());
+        threadConnectionRunTester = new Thread(this
+        );
         threadConnectionRunTester.start();
-        System.out.println(threadConnectionRunTester.isAlive());
-
+        threadID = threadConnectionRunTester.getId();
     }
 
     public void killConnecionStatusCheck() {
+        if(threadConnectionRunTester.currentThread().isInterrupted()){
+            System.out.println("alive " + this.threadID);
+        }else{
+            System.out.println("dead " + threadID);
+        }
+        //System.out.println(threadConnectionRunTester.getId());
+        //System.out.println(Thread.currentThread().isAlive());
+        //Thread.currentThread().interrupt();
 
-        System.out.println(threadConnectionRunTester.getId());
-        System.out.println(Thread.currentThread().isAlive());
-        Thread.currentThread().interrupt();
 
 
 
@@ -41,10 +45,10 @@ public class ConnectionStatus implements Runnable {
     public void run() {
         while (!shutdown) {
             try {
-                System.out.println("Thread id: " + threadConnectionRunTester.getId());
+                System.out.println("Thread id: " + threadID);
                 threadConnectionRunTester.sleep(1000);
             } catch (InterruptedException interruptedException) {
-                System.out.println("InterruptedException: thread " + ThreadID + "(SLEEP) - " + "Connection status");
+                System.out.println("InterruptedException: thread " + threadID + "(SLEEP) - " + "Connection status");
             }
         }
     }
