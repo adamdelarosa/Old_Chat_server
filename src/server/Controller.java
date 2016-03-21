@@ -19,7 +19,8 @@ public class Controller implements Runnable {
     @FXML private Label getFromClientText;
     @FXML public TextArea serverChatArea;
     @FXML public TextField serverChatField;
-    @FXML private Button connectionStatusStart,connectionStatusStop;
+    @FXML public Button connectionStatusStart;
+    @FXML public Button connectionStatusStop;
     boolean tofConnectionStatus;
 
 
@@ -63,14 +64,14 @@ public class Controller implements Runnable {
     private void waitingForConnection() throws IOException {
         socketState = serverSocketState.accept();
         serverChatArea.appendText("\nWaiting for connection...");
+
     }
+    @FXML
     public void connectionStatusStart(){
-        classconnectionstatus = new ConnectionStatus(true);
+        classconnectionstatus = new ConnectionStatus(true,this);
         classconnectionstatus.startConnecionStatusCheck();
-        Platform.runLater(()->{
-            connectionStatusStart.isDisable();
-        });
     }
+    @FXML
     public void connectionStatusStop(){
         classconnectionstatus.killConnecionStatusCheck();
     }
@@ -91,7 +92,6 @@ public class Controller implements Runnable {
         });
     }
 
-    @FXML
     public void closeConnection() {
             getFromClientSwitch = true; //<--- Kill Controller Thread
             if(!true) {
