@@ -68,7 +68,7 @@ public class Controller implements Runnable {
     }
     @FXML
     public void connectionStatusStart(){
-        classconnectionstatus = new ConnectionStatus(true,this);
+        classconnectionstatus = new ConnectionStatus(true,this,this);
         classconnectionstatus.startConnecionStatusCheck();
     }
     @FXML
