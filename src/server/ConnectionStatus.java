@@ -25,7 +25,6 @@ public class ConnectionStatus implements Runnable {
 
 
 
-
         /*if(threadConnectionRunTester.isAlive()){
            // System.out.println("Connection status: Thread " + ThreadID + " - Running.");
             System.out.println("threadConnectionRunTester - run status check first.");
