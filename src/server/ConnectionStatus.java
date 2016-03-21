@@ -20,22 +20,6 @@ public class ConnectionStatus implements Runnable {
     public void killConnecionStatusCheck() {
         shutdown = false;
         startButton.connectionStatusStart.setDisable(false);
-
-        //threadConnectionRunTester.interrupt();
-        //System.out.println("Kill: " + threadID + " - Connection status");
-
-/*
-        if(threadConnectionRunTester.isAlive()){
-           // System.out.println("Connection status: Thread " + ThreadID + " - Running.");
-            System.out.println("threadConnectionRunTester - run status check first.");
-            return;
-        }else {
-            threadID = threadConnectionRunTester.getId();
-            shutdown = true;
-            threadConnectionRunTester.interrupt();
-            System.out.println("Kill: " + threadID + " - Connection status");
-        }
-*/
     }
 
     @Override
