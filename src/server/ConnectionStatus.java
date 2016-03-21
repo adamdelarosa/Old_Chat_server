@@ -2,8 +2,6 @@ package server;
 
 public class ConnectionStatus implements Runnable {
 
-
-
     private boolean shutdown = false;
     private Thread iThread;
 
