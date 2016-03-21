@@ -19,6 +19,8 @@ public class ConnectionStatus implements Runnable {
 
     public void killConnecionStatusCheck() {
         shutdown = false;
+        startButton.connectionStatusStart.setDisable(false);
+
         //threadConnectionRunTester.interrupt();
         //System.out.println("Kill: " + threadID + " - Connection status");
 
@@ -40,9 +42,9 @@ public class ConnectionStatus implements Runnable {
     public void run() {
         while (shutdown) {
             try {
+                startButton.connectionStatusStart.setDisable(true);
                 System.out.println("Thread id: ");
                 iThread.sleep(1000);
-                startButton.connectionStatusStart.setDisable(true);
             } catch (InterruptedException interruptedException) {
                 System.out.println("InterruptedException: thread " + "(SLEEP) - " + "Connection status");
             }
