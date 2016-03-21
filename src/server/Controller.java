@@ -2,6 +2,7 @@ package server;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -18,6 +19,7 @@ public class Controller implements Runnable {
     @FXML private Label getFromClientText;
     @FXML public TextArea serverChatArea;
     @FXML public TextField serverChatField;
+    @FXML private Button connectionStatusStart,connectionStatusStop;
     boolean tofConnectionStatus;
 
 
@@ -65,6 +67,9 @@ public class Controller implements Runnable {
     public void connectionStatusStart(){
         classconnectionstatus = new ConnectionStatus(true);
         classconnectionstatus.startConnecionStatusCheck();
+        Platform.runLater(()->{
+            connectionStatusStart.isDisable();
+        });
     }
     public void connectionStatusStop(){
         classconnectionstatus.killConnecionStatusCheck();
