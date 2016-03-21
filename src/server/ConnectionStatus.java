@@ -4,12 +4,13 @@ public class ConnectionStatus implements Runnable {
 
     private boolean shutdown = false;
     private Thread iThread;
-    private Controller startButton,stopButton;
+    private Controller startButton,stopButton,onlineOfflineText;
 
-    public ConnectionStatus(Boolean stopping,Controller startbutton,Controller stopbutton) {
+    public ConnectionStatus(Boolean stopping,Controller startbutton,Controller stopbutton,Controller onlineofflinetext) {
         shutdown = stopping;
         startButton = startbutton;
         stopButton = stopbutton;
+        onlineOfflineText = onlineofflinetext;
 
     }
 
@@ -29,6 +30,8 @@ public class ConnectionStatus implements Runnable {
     public void run() {
         while (shutdown) {
             try {
+                //Active or not:
+                onlineOfflineText.connectionStatusActive.setText("ONLINE");
                 startButton.connectionStatusStart.setDisable(true);
                 System.out.println("Thread id: ");
                 iThread.sleep(1000);

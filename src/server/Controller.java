@@ -17,6 +17,7 @@ public class Controller implements Runnable {
     @FXML private Label connectToClientText;
     @FXML private Label setSteamsText;
     @FXML private Label getFromClientText;
+    @FXML public Label connectionStatusActive;
     @FXML public TextArea serverChatArea;
     @FXML public TextField serverChatField;
     @FXML public Button connectionStatusStart;
@@ -68,7 +69,7 @@ public class Controller implements Runnable {
     }
     @FXML
     public void connectionStatusStart(){
-        classconnectionstatus = new ConnectionStatus(true,this,this);
+        classconnectionstatus = new ConnectionStatus(true,this,this,this);
         classconnectionstatus.startConnecionStatusCheck();
     }
     @FXML
