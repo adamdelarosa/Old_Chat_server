@@ -6,7 +6,6 @@ public class ConnectionStatus implements Runnable {
 
     private boolean shutdown = false;
     private Thread iThread;
-    private long threadID;
 
     public ConnectionStatus(Boolean stopping) {
         shutdown = stopping;
@@ -16,12 +15,10 @@ public class ConnectionStatus implements Runnable {
     public void startConnecionStatusCheck() {
         iThread = new Thread(this);
         iThread.start();
-        //threadID = threadConnectionRunTester.getId();
     }
 
     public void killConnecionStatusCheck() {
 
-        //threadID = threadConnectionRunTester.getId();
         shutdown = false;
         //threadConnectionRunTester.interrupt();
         //System.out.println("Kill: " + threadID + " - Connection status");
@@ -44,10 +41,10 @@ public class ConnectionStatus implements Runnable {
     public void run() {
         while (shutdown) {
             try {
-                System.out.println("Thread id: " + threadID);
+                System.out.println("Thread id: ");
                 iThread.sleep(1000);
             } catch (InterruptedException interruptedException) {
-                System.out.println("InterruptedException: thread " + threadID + "(SLEEP) - " + "Connection status");
+                System.out.println("InterruptedException: thread " + "(SLEEP) - " + "Connection status");
             }
         }
     }
