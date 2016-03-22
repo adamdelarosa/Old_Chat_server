@@ -21,7 +21,7 @@ public class ConnectionStatus implements Runnable {
         onlineOfflineText.connectionStatusActive.setText("ONLINE");
         onlineOfflineText.connectionStatusActive.setTextFill(javafx.scene.paint.Color.web("#00FF00"));
         onlineBlink = new Thread(() -> {
-            while(shutdown = true){
+            while(shutdown){
                 try {
                     onlineOfflineText.connectionStatusActive.setTextFill(javafx.scene.paint.Color.web("#00FF00"));
                     onlineBlink.sleep(1000);
