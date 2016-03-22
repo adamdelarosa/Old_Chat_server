@@ -1,16 +1,22 @@
 package server;
 
+import java.util.Date;
+
+
 public class ConnectionStatus implements Runnable {
 
     private boolean shutdown = false;
     private Thread iThread,onlineBlink;
-    private Controller startButton,stopButton,onlineOfflineText;
+    private Controller startButton,stopButton,onlineOfflineText,serverLogArea;
 
-    public ConnectionStatus(Boolean stopping,Controller startbutton,Controller stopbutton,Controller onlineofflinetext) {
+    Date logDate = new Date();
+
+    public ConnectionStatus(Boolean stopping,Controller startbutton,Controller stopbutton,Controller onlineofflinetext,Controller serverlogarea) {
         shutdown = stopping;
         startButton = startbutton;
         stopButton = stopbutton;
         onlineOfflineText = onlineofflinetext;
+        serverLogArea = serverlogarea;
 
     }
 
@@ -33,6 +39,7 @@ public class ConnectionStatus implements Runnable {
             }
         });
         onlineBlink.start();
+        serverLogArea.serverLogArea.appendText("Status check started: " + logDate);
     }
 
     public void killConnecionStatusCheck() {
@@ -41,6 +48,8 @@ public class ConnectionStatus implements Runnable {
         stopButton.connectionStatusStop.setDisable(true);
         onlineOfflineText.connectionStatusActive.setText("OFFLINE");
         onlineOfflineText.connectionStatusActive.setTextFill(javafx.scene.paint.Color.web("#ff0000"));
+        serverLogArea.serverLogArea.appendText("Status check stopped: " + logDate);
+
     }
 
     @Override
