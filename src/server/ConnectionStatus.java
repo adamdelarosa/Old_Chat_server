@@ -39,7 +39,7 @@ public class ConnectionStatus implements Runnable {
             }
         });
         onlineBlink.start();
-        serverLogArea.serverLogArea.appendText("Status check started: " + logDate);
+        serverLogArea.serverLogArea.appendText("\n" + logDate + ": Status check started");
     }
 
     public void killConnecionStatusCheck() {
@@ -48,7 +48,7 @@ public class ConnectionStatus implements Runnable {
         stopButton.connectionStatusStop.setDisable(true);
         onlineOfflineText.connectionStatusActive.setText("OFFLINE");
         onlineOfflineText.connectionStatusActive.setTextFill(javafx.scene.paint.Color.web("#ff0000"));
-        serverLogArea.serverLogArea.appendText("Status check stopped: " + logDate);
+        serverLogArea.serverLogArea.appendText("\n" + logDate + ": Status check stopped");
 
     }
 
@@ -57,7 +57,6 @@ public class ConnectionStatus implements Runnable {
         onlineOfflineText.connectionStatusActive.setText("ONLINE");
         while (shutdown) {
             try {
-                //Active or not
                 startButton.connectionStatusStart.setDisable(true);
                 System.out.println("Thread id: ");
                 iThread.sleep(1000);
