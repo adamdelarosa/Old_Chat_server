@@ -6,12 +6,12 @@ import java.util.Date;
 public class ConnectionStatus implements Runnable {
 
     private boolean shutdown = false;
-    private Thread iThread,onlineBlink;
-    private Controller startButton,stopButton,onlineOfflineText,serverLogArea;
+    private Thread iThread, onlineBlink;
+    private Controller startButton, stopButton, onlineOfflineText, serverLogArea;
 
     Date logDate = new Date();
 
-    public ConnectionStatus(Boolean stopping,Controller startbutton,Controller stopbutton,Controller onlineofflinetext,Controller serverlogarea) {
+    public ConnectionStatus(Boolean stopping, Controller startbutton, Controller stopbutton, Controller onlineofflinetext, Controller serverlogarea) {
         shutdown = stopping;
         startButton = startbutton;
         stopButton = stopbutton;
@@ -27,13 +27,13 @@ public class ConnectionStatus implements Runnable {
         onlineOfflineText.connectionStatusActive.setText("ONLINE");
         onlineOfflineText.connectionStatusActive.setTextFill(javafx.scene.paint.Color.web("#00FF00"));
         onlineBlink = new Thread(() -> {
-            while(shutdown){
+            while (shutdown) {
                 try {
                     onlineOfflineText.connectionStatusActive.setTextFill(javafx.scene.paint.Color.web("#00FF00"));
                     onlineBlink.sleep(1000);
                     onlineOfflineText.connectionStatusActive.setTextFill(javafx.scene.paint.Color.web("#0000FF"));
                     onlineBlink.sleep(1000);
-                }catch (InterruptedException interruptedException){
+                } catch (InterruptedException interruptedException) {
                     System.out.println("InterruptedException - onlineOfflineText switch Error.");
                 }
             }
@@ -49,7 +49,6 @@ public class ConnectionStatus implements Runnable {
         onlineOfflineText.connectionStatusActive.setText("OFFLINE");
         onlineOfflineText.connectionStatusActive.setTextFill(javafx.scene.paint.Color.web("#ff0000"));
         serverLogArea.serverLogArea.appendText("\n" + logDate + ": Status check stopped");
-
     }
 
     @Override
