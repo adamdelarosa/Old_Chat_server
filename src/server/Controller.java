@@ -134,7 +134,12 @@ public class Controller implements Runnable {
                 eofexception.printStackTrace();
             } catch (IOException ioexception) {
                 ioexception.printStackTrace();
-                serverLogArea.appendText(ioexception.toString());
+
+
+                serverLogArea.appendText(ioexception.toString()); // <---Need to go to log area(Text Area)
+
+
+
             }
             Platform.runLater(() -> {
                 getFromClientText.setText("ONLINE");
