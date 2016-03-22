@@ -131,8 +131,10 @@ public class Controller implements Runnable {
                 Platform.runLater(() -> serverChatArea.appendText(msg + "\n"));
 
             } catch (EOFException eofexception) {
-            } catch (IOException e) {
-                e.printStackTrace();
+                eofexception.printStackTrace();
+            } catch (IOException ioexception) {
+                ioexception.printStackTrace();
+                serverLogArea.appendText(ioexception.toString());
             }
             Platform.runLater(() -> {
                 getFromClientText.setText("ONLINE");
