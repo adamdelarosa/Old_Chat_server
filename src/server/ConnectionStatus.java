@@ -3,7 +3,7 @@ package server;
 public class ConnectionStatus implements Runnable {
 
     private boolean shutdown = false;
-    private Thread iThread;
+    private Thread iThread,onlineBlink;
     private Controller startButton,stopButton,onlineOfflineText;
 
     public ConnectionStatus(Boolean stopping,Controller startbutton,Controller stopbutton,Controller onlineofflinetext) {
@@ -20,6 +20,19 @@ public class ConnectionStatus implements Runnable {
         iThread.start();
         onlineOfflineText.connectionStatusActive.setText("ONLINE");
         onlineOfflineText.connectionStatusActive.setTextFill(javafx.scene.paint.Color.web("#00FF00"));
+        onlineBlink = new Thread(() -> {
+            while(shutdown = true){
+                try {
+                    onlineOfflineText.connectionStatusActive.setTextFill(javafx.scene.paint.Color.web("#00FF00"));
+                    onlineBlink.sleep(1000);
+                    onlineOfflineText.connectionStatusActive.setTextFill(javafx.scene.paint.Color.web("#0000FF"));
+                    onlineBlink.sleep(1000);
+                }catch (InterruptedException interruptedException){
+                    System.out.println("InterruptedException - onlineOfflineText switch Error.");
+                }
+            }
+        });
+        onlineBlink.start();
     }
 
     public void killConnecionStatusCheck() {
