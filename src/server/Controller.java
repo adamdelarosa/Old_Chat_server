@@ -35,6 +35,7 @@ public class Controller implements Runnable {
     private Thread threadConnectionDeadOrAlive;
     private boolean getFromClientSwitch;
     private String msg;
+    private EOFException eofexceptionGetMessage;
 
     private ConnectionStatus classconnectionstatus;
 
@@ -50,13 +51,13 @@ public class Controller implements Runnable {
                         setSteams();
                         getMessage();
                     } catch (EOFException eofexception) {
-                        serverChatArea.appendText("\nIOException - Server connection error.");
+                        serverLogArea.appendText("\nIOException - Server connection error.");
                     } finally {
                         closeConnection();
                     }
                 }
             } catch (BindException bindexception) {
-                serverChatArea.appendText("\n Already connected.");
+                serverLogArea.appendText("\n BindException - Already connected.");
             } catch (IOException ioexception) {
                 ioexception.printStackTrace();
             }
@@ -105,7 +106,7 @@ public class Controller implements Runnable {
                     serverLogArea.appendText("\n getFromClientSwitch - OFF");
                 }
                 //Turn off getFromClientSwitch in case of close connection:
-                if(msg != null){
+                if(true){
                     serverLogArea.appendText("null");
                 }else{
                     serverLogArea.appendText("no null");
@@ -148,7 +149,7 @@ public class Controller implements Runnable {
     }
 
     public void run() {
-
+        System.out.println("HELLO");
         do {
             try {
                 msg = getFromClient.readUTF();
@@ -156,9 +157,9 @@ public class Controller implements Runnable {
 
             } catch (EOFException eofexception) {
                 eofexception.printStackTrace();
-            } catch (IOException ioexception) {
-                ioexception.printStackTrace();
-                serverLogArea.appendText(ioexception.toString()); // <---Need to go to log area(Text Area)
+            } catch (IOException eofexceptionGetMessage) {
+                eofexceptionGetMessage.printStackTrace();
+                serverLogArea.appendText(eofexceptionGetMessage.toString()); // <---Need to go to log area(Text Area)
             }
             Platform.runLater(() -> {
                 getFromClientText.setText("ONLINE");
