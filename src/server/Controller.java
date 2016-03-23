@@ -32,6 +32,7 @@ public class Controller implements Runnable {
     private int port = 6789;
     private int numberOfConnetions = 100;
     private Thread iThread;
+    private Thread threadConnectionDeadOrAlive;
     private boolean getFromClientSwitch;
 
     private ConnectionStatus classconnectionstatus;
@@ -43,6 +44,7 @@ public class Controller implements Runnable {
                 serverSocketState = new ServerSocket(port, numberOfConnetions);
                 while (!getFromClientSwitch) {
                     try {
+                        connectionLiveOrDead();
                         waitingForConnection();
                         setSteams();
                         getMessage();
@@ -79,6 +81,15 @@ public class Controller implements Runnable {
     public void testSwitch(){
         tofConnectionStatus = !tofConnectionStatus;
         System.out.println("STATE: " + tofConnectionStatus);
+    }
+
+    public void connectionLiveOrDead(){
+        threadConnectionDeadOrAlive = new Thread(()->{
+            while(true){
+            System.out.println("HELLO MISTER");
+            }
+        });
+        threadConnectionDeadOrAlive.start();
     }
 
 
