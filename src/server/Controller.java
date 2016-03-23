@@ -34,6 +34,7 @@ public class Controller implements Runnable {
     private Thread iThread;
     private Thread threadConnectionDeadOrAlive;
     private boolean getFromClientSwitch;
+    private String msg;
 
     private ConnectionStatus classconnectionstatus;
 
@@ -42,7 +43,7 @@ public class Controller implements Runnable {
         Thread runAndConnectToClient = new Thread(() -> {
             try {
                 serverSocketState = new ServerSocket(port, numberOfConnetions);
-                while (!getFromClientSwitch) {
+                while (true) {
                     try {
                         connectionLiveOrDead();
                         waitingForConnection();
@@ -64,6 +65,11 @@ public class Controller implements Runnable {
         connectToClientText.setText("ONLINE");
         connectToClientText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
     }
+
+    public void closeConnection() {
+        getFromClientSwitch = true; //<--- Kill Controller Thread
+    }
+
     private void waitingForConnection() throws IOException {
         socketState = serverSocketState.accept();
         serverChatArea.appendText("\nWaiting for connection...");
@@ -86,7 +92,26 @@ public class Controller implements Runnable {
     public void connectionLiveOrDead(){
         threadConnectionDeadOrAlive = new Thread(()->{
             while(true){
-            System.out.println("HELLO MISTER");
+                //Wait a while..
+                try{
+                    threadConnectionDeadOrAlive.sleep(1000);
+                }catch (InterruptedException threadConnectionDeadOrAliveInterruptedException){
+                    serverLogArea.appendText("\n threadConnectionDeadOrAlive - fail" + getClass());
+                }
+                //getMessage check:
+                if(getFromClientSwitch){
+                    serverLogArea.appendText("\n getFromClientSwitch - ON");
+                }else{
+                    serverLogArea.appendText("\n getFromClientSwitch - OFF");
+                }
+                //Turn off getFromClientSwitch in case of close connection:
+                if(msg != null){
+                    serverLogArea.appendText("null");
+                }else{
+                    serverLogArea.appendText("no null");
+                }
+
+
             }
         });
         threadConnectionDeadOrAlive.start();
@@ -102,18 +127,6 @@ public class Controller implements Runnable {
             setSteamsText.setText("ONLINE");
             setSteamsText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
         });
-    }
-
-    public void closeConnection() {
-            getFromClientSwitch = true; //<--- Kill Controller Thread
-            if(!true) {
-                try {
-                    serverSocketState.close(); // <---need to test first.
-                    System.out.println("closeConnection - DONE.");
-                } catch (IOException ioexception) {
-                    ioexception.printStackTrace();
-                }
-            }
     }
 
     public void sendMessage() {
@@ -138,7 +151,7 @@ public class Controller implements Runnable {
 
         do {
             try {
-                String msg = getFromClient.readUTF();
+                msg = getFromClient.readUTF();
                 Platform.runLater(() -> serverChatArea.appendText(msg + "\n"));
 
             } catch (EOFException eofexception) {
