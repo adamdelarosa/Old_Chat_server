@@ -144,32 +144,32 @@ public class Controller implements Runnable {
     }
 
     private void getMessage() {
+        getFromClientSwitch = false;
         iThread = new Thread(this);
         iThread.run();
     }
 
     public void run() {
-        System.out.println("HELLO");
-        do {
+        while(!getFromClientSwitch)  {
             try {
                 msg = getFromClient.readUTF();
                 Platform.runLater(() -> serverChatArea.appendText(msg + "\n"));
 
             } catch (EOFException eofexception) {
-                eofexception.printStackTrace();
                 getFromClientSwitch = true;
                 serverLogArea.appendText("\n EOFException: getFromClient - STOPPED.");
                 serverLogArea.appendText(eofexception.getMessage()); // <---Need to go to log area(Text Area)
+                eofexception.printStackTrace();
             } catch (IOException eofexceptionGetMessage) {
-                eofexceptionGetMessage.printStackTrace();
                 serverLogArea.appendText("\n IOException: getFromClient - STOPPED.");
                 serverLogArea.appendText(eofexceptionGetMessage.toString()); // <---Need to go to log area(Text Area)
                 getFromClientSwitch = true;
+                eofexceptionGetMessage.printStackTrace();
             }
             Platform.runLater(() -> {
                 getFromClientText.setText("ONLINE");
                 getFromClientText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
             });
-        } while (!getFromClientSwitch);
+        }
     }
 }
