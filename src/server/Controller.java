@@ -73,7 +73,7 @@ public class Controller implements Runnable {
 
     private void waitingForConnection() throws IOException {
         socketState = serverSocketState.accept();
-        serverChatArea.appendText("\nWaiting for connection...");
+        serverLogArea.appendText("\nWaiting for connection...");
 
     }
     @FXML
@@ -124,7 +124,7 @@ public class Controller implements Runnable {
         sendToClient.flush();
         getFromClient = new DataInputStream(socketState.getInputStream());
         Platform.runLater(() -> {
-            serverChatArea.appendText("\nClient connected.");
+            serverLogArea.appendText("\nClient connected.");
             setSteamsText.setText("ONLINE");
             setSteamsText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
         });
@@ -138,7 +138,7 @@ public class Controller implements Runnable {
             serverChatField.setText("");
             Platform.runLater(() -> serverChatArea.appendText("\n" + messageOut));
         } catch (IOException e) {
-            serverChatArea.appendText("\nMessage was not sent.");
+            serverLogArea.appendText("\nMessage was not sent.");
             e.printStackTrace();
         }
     }
@@ -157,9 +157,14 @@ public class Controller implements Runnable {
 
             } catch (EOFException eofexception) {
                 eofexception.printStackTrace();
+                getFromClientSwitch = true;
+                serverLogArea.appendText("\n EOFException: getFromClient - STOPPED.");
+                serverLogArea.appendText(eofexception.getMessage()); // <---Need to go to log area(Text Area)
             } catch (IOException eofexceptionGetMessage) {
                 eofexceptionGetMessage.printStackTrace();
+                serverLogArea.appendText("\n IOException: getFromClient - STOPPED.");
                 serverLogArea.appendText(eofexceptionGetMessage.toString()); // <---Need to go to log area(Text Area)
+                getFromClientSwitch = true;
             }
             Platform.runLater(() -> {
                 getFromClientText.setText("ONLINE");
