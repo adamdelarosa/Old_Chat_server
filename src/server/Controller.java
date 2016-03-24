@@ -14,14 +14,22 @@ import java.net.Socket;
 
 public class Controller implements Runnable {
 
-    @FXML private Label connectToClientText;
-    @FXML private Label setSteamsText;
-    @FXML private Label getFromClientText;
-    @FXML public Label connectionStatusActive;
-    @FXML public TextArea serverChatArea,serverLogArea;
-    @FXML public TextField serverChatField;
-    @FXML public Button connectionStatusStart;
-    @FXML public Button connectionStatusStop;
+    @FXML
+    private Label connectToClientText;
+    @FXML
+    private Label setSteamsText;
+    @FXML
+    private Label textLabelGetFromClient;
+    @FXML
+    public Label connectionStatusActive;
+    @FXML
+    public TextArea serverChatArea, serverLogArea;
+    @FXML
+    public TextField serverChatField;
+    @FXML
+    public Button connectionStatusStart;
+    @FXML
+    public Button connectionStatusStop;
     boolean tofConnectionStatus;
 
 
@@ -33,7 +41,7 @@ public class Controller implements Runnable {
     private int numberOfConnetions = 100;
     private Thread iThread;
     private Thread threadConnectionDeadOrAlive;
-    private boolean getFromClientSwitch =false;
+    private boolean getFromClientSwitch = false;
     private String msg;
     private EOFException eofexceptionGetMessage;
 
@@ -76,34 +84,40 @@ public class Controller implements Runnable {
         serverLogArea.appendText("\nWaiting for connection...");
 
     }
+
     @FXML
-    public void connectionStatusStart(){
-        classconnectionstatus = new ConnectionStatus(true,this,this,this,this);
+    public void connectionStatusStart() {
+        classconnectionstatus = new ConnectionStatus(true, this, this, this, this);
         classconnectionstatus.startConnecionStatusCheck();
     }
+
     @FXML
-    public void connectionStatusStop(){
+    public void connectionStatusStop() {
         classconnectionstatus.killConnecionStatusCheck();
     }
-    public void testSwitch(){
+
+    public void testSwitch() {
         tofConnectionStatus = !tofConnectionStatus;
         System.out.println("STATE: " + tofConnectionStatus);
     }
 
-    public void connectionLiveOrDead(){
-        threadConnectionDeadOrAlive = new Thread(()->{
-            while(true){
-                //Wait a while..
-                try{
-                    threadConnectionDeadOrAlive.sleep(1000);
-                }catch (InterruptedException threadConnectionDeadOrAliveInterruptedException){
-                    serverLogArea.appendText("\n threadConnectionDeadOrAlive - fail" + getClass());
-                }
-                //getMessage check:
-                if(getFromClientSwitch){
-                    serverLogArea.appendText("\n getFromClientSwitch - ON");
-                }else{
-                    serverLogArea.appendText("\n getFromClientSwitch - OFF");
+    public void connectionLiveOrDead() {
+        threadConnectionDeadOrAlive = new Thread(() -> {
+            while (true) {
+                    try {
+                        threadConnectionDeadOrAlive.sleep(1000);
+                    } catch (InterruptedException e) {}
+                if (getFromClientSwitch) {
+
+                    Platform.runLater(() -> {
+                        textLabelGetFromClient.setText("ONLINE");
+                        textLabelGetFromClient.setTextFill(javafx.scene.paint.Color.web("#0000ff"));
+                    });
+                } else {
+                    Platform.runLater(() -> {
+                        textLabelGetFromClient.setText("OFFLINE");
+                        textLabelGetFromClient.setTextFill(javafx.scene.paint.Color.web("#ff0000"));
+                    });
                 }
             }
         });
@@ -142,7 +156,7 @@ public class Controller implements Runnable {
     }
 
     public void run() {
-        while(getFromClientSwitch)  {
+        while (getFromClientSwitch) {
             try {
                 msg = getFromClient.readUTF();
                 Platform.runLater(() -> serverChatArea.appendText(msg + "\n"));
@@ -150,7 +164,6 @@ public class Controller implements Runnable {
             } catch (EOFException eofexception) {
                 getFromClientSwitch = true;
                 serverLogArea.appendText("\n EOFException: getFromClient - STOPPED.");
-                serverLogArea.appendText(eofexception.getMessage()); // <---Need to go to log area(Text Area)
                 eofexception.printStackTrace();
             } catch (IOException eofexceptionGetMessage) {
                 serverLogArea.appendText("\n IOException: getFromClient - STOPPED.");
@@ -158,10 +171,6 @@ public class Controller implements Runnable {
                 getFromClientSwitch = true;
                 eofexceptionGetMessage.printStackTrace();
             }
-            Platform.runLater(() -> {
-                getFromClientText.setText("ONLINE");
-                getFromClientText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
-            });
         }
     }
 }
