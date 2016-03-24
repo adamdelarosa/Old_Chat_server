@@ -33,7 +33,7 @@ public class Controller implements Runnable {
     private int numberOfConnetions = 100;
     private Thread iThread;
     private Thread threadConnectionDeadOrAlive;
-    private boolean getFromClientSwitch;
+    private boolean getFromClientSwitch =false;
     private String msg;
     private EOFException eofexceptionGetMessage;
 
@@ -68,7 +68,7 @@ public class Controller implements Runnable {
     }
 
     public void closeConnection() {
-        getFromClientSwitch = true; //<--- Kill Controller Thread
+        getFromClientSwitch = false; //<--- Kill Controller Thread
     }
 
     private void waitingForConnection() throws IOException {
@@ -105,14 +105,6 @@ public class Controller implements Runnable {
                 }else{
                     serverLogArea.appendText("\n getFromClientSwitch - OFF");
                 }
-                //Turn off getFromClientSwitch in case of close connection:
-                if(true){
-                    serverLogArea.appendText("null");
-                }else{
-                    serverLogArea.appendText("no null");
-                }
-
-
             }
         });
         threadConnectionDeadOrAlive.start();
@@ -144,13 +136,13 @@ public class Controller implements Runnable {
     }
 
     private void getMessage() {
-        getFromClientSwitch = false;
+        getFromClientSwitch = true;
         iThread = new Thread(this);
         iThread.run();
     }
 
     public void run() {
-        while(!getFromClientSwitch)  {
+        while(getFromClientSwitch)  {
             try {
                 msg = getFromClient.readUTF();
                 Platform.runLater(() -> serverChatArea.appendText(msg + "\n"));
