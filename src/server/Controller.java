@@ -155,7 +155,6 @@ public class Controller implements Runnable {
         iThread.run();
     }
 
-
     public void run() {
         while (getFromClientSwitch) {
             try {
