@@ -159,16 +159,15 @@ public class Controller implements Runnable {
         while (getFromClientSwitch) {
             try {
                 msg = getFromClient.readUTF();
-                Platform.runLater(() -> serverChatArea.appendText(msg + "\n"));
+
 
             } catch (EOFException eofexception) {
-                getFromClientSwitch = true;
+                getFromClientSwitch = false;
                 serverLogArea.appendText("\n EOFException: getFromClient - STOPPED.");
-                eofexception.printStackTrace();
+                //eofexception.printStackTrace();
             } catch (IOException eofexceptionGetMessage) {
                 serverLogArea.appendText("\n IOException: getFromClient - STOPPED.");
-                serverLogArea.appendText(eofexceptionGetMessage.toString()); // <---Need to go to log area(Text Area)
-                getFromClientSwitch = true;
+                getFromClientSwitch = false;
                 eofexceptionGetMessage.printStackTrace();
             }
         }
