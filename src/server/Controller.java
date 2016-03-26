@@ -48,24 +48,24 @@ public class Controller implements Runnable {
     private ConnectionStatus classconnectionstatus;
 
     public void connectToClient() {
-
+        getFromClientSwitch = true;
+        serverLogArea.appendText("*** Server Started ***");
         Thread runAndConnectToClient = new Thread(() -> {
             try {
-                serverSocketState = new ServerSocket(port, numberOfConnetions);
+
                 while (true) {
                     try {
+                        serverSocketState();
                         connectionLiveOrDead();
                         waitingForConnection();
                         setSteams();
                         getMessage();
                     } catch (EOFException eofexception) {
-                        serverLogArea.appendText("\nIOException - Server connection error.");
-                    } finally {
                         closeConnection();
                     }
                 }
             } catch (BindException bindexception) {
-                serverLogArea.appendText("\n BindException - Already connected.");
+                bindexception.printStackTrace();
             } catch (IOException ioexception) {
                 ioexception.printStackTrace();
             }
@@ -73,6 +73,19 @@ public class Controller implements Runnable {
         runAndConnectToClient.start();
         connectToClientText.setText("ONLINE");
         connectToClientText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
+    }
+
+    public void serverSocketState(){
+        if(serverSocketState == null) {
+            try {
+                serverSocketState = new ServerSocket(port, numberOfConnetions);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            serverLogArea.appendText("\n" + String.valueOf(serverSocketState));
+        }else{
+            serverLogArea.appendText("serverSocketState - " + serverSocketState);
+        }
     }
 
     public void closeConnection() {
@@ -104,19 +117,15 @@ public class Controller implements Runnable {
     public void connectionLiveOrDead() {
         threadConnectionDeadOrAlive = new Thread(() -> {
             while (true) {
-                    try {
-                        threadConnectionDeadOrAlive.sleep(1000);
-                    } catch (InterruptedException e) {}
                 if (getFromClientSwitch) {
-
                     Platform.runLater(() -> {
                         textLabelGetFromClient.setText("ONLINE");
-                        textLabelGetFromClient.setTextFill(javafx.scene.paint.Color.web("#0000ff"));
+                        textLabelGetFromClient.setTextFill(javafx.scene.paint.Color.web("#00FF00"));
                     });
                 } else {
                     Platform.runLater(() -> {
                         textLabelGetFromClient.setText("OFFLINE");
-                        textLabelGetFromClient.setTextFill(javafx.scene.paint.Color.web("#ff0000"));
+                        textLabelGetFromClient.setTextFill(javafx.scene.paint.Color.web("#00FF00"));
                     });
                 }
             }
@@ -162,12 +171,12 @@ public class Controller implements Runnable {
 
 
             } catch (EOFException eofexception) {
-                getFromClientSwitch = false;
+                eofexception.printStackTrace();
+                //getFromClientSwitch = false;
                 serverLogArea.appendText("\n EOFException: getFromClient - STOPPED.");
-                //eofexception.printStackTrace();
             } catch (IOException eofexceptionGetMessage) {
+                //getFromClientSwitch = false;
                 serverLogArea.appendText("\n IOException: getFromClient - STOPPED.");
-                getFromClientSwitch = false;
                 eofexceptionGetMessage.printStackTrace();
             }
         }
