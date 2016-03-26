@@ -82,7 +82,7 @@ public class Controller implements Runnable {
             }
             serverLogArea.appendText("\n" + String.valueOf(serverSocketState));
         }else{
-            serverLogArea.appendText("serverSocketState - " + serverSocketState);
+            serverLogArea.appendText("\n" + String.valueOf(serverSocketState));
         }
     }
 
@@ -146,7 +146,7 @@ public class Controller implements Runnable {
         while (getFromClientSwitch) {
             try {
                 msg = getFromClient.readUTF();
-                serverChatArea.appendText(msg);
+                serverChatArea.appendText("\n" + msg);
 
                 Platform.runLater(()->{
                 textLabelGetFromClient.setText("ONLINE");
@@ -156,10 +156,10 @@ public class Controller implements Runnable {
             } catch (EOFException eofexception) {
                 eofexception.printStackTrace();
                 getFromClientSwitch = false;
-                serverLogArea.appendText("\n EOFException: getFromClient - STOPPED.");
+                serverLogArea.appendText("\nEOFException: getFromClient - STOPPED.");
             } catch (IOException eofexceptionGetMessage) {
                 getFromClientSwitch = false;
-                serverLogArea.appendText("\n IOException: getFromClient - STOPPED.");
+                serverLogArea.appendText("\nIOException: getFromClient - STOPPED.");
                 eofexceptionGetMessage.printStackTrace();
             }
         }
