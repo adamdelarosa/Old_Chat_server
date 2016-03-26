@@ -56,7 +56,7 @@ public class Controller implements Runnable {
                 while (true) {
                     try {
                         serverSocketState();
-                        connectionLiveOrDead();
+                      //  connectionLiveOrDead();
                         waitingForConnection();
                         setSteams();
                         getMessage();
@@ -114,7 +114,7 @@ public class Controller implements Runnable {
         System.out.println("STATE: " + tofConnectionStatus);
     }
 
-    public void connectionLiveOrDead() {
+/*    public void connectionLiveOrDead() {
         threadConnectionDeadOrAlive = new Thread(() -> {
             while (true) {
                 if (getFromClientSwitch) {
@@ -131,7 +131,7 @@ public class Controller implements Runnable {
             }
         });
         threadConnectionDeadOrAlive.start();
-    }
+    }*/
 
 
     private void setSteams() throws IOException {
@@ -168,17 +168,26 @@ public class Controller implements Runnable {
         while (getFromClientSwitch) {
             try {
                 msg = getFromClient.readUTF();
+                serverChatArea.appendText(msg);
 
+                Platform.runLater(()->{
+                textLabelGetFromClient.setText("ONLINE");
+                textLabelGetFromClient.setTextFill(javafx.scene.paint.Color.web("#00FF00"));
+                });
 
             } catch (EOFException eofexception) {
                 eofexception.printStackTrace();
-                //getFromClientSwitch = false;
+                getFromClientSwitch = false;
                 serverLogArea.appendText("\n EOFException: getFromClient - STOPPED.");
             } catch (IOException eofexceptionGetMessage) {
-                //getFromClientSwitch = false;
+                getFromClientSwitch = false;
                 serverLogArea.appendText("\n IOException: getFromClient - STOPPED.");
                 eofexceptionGetMessage.printStackTrace();
             }
         }
+        Platform.runLater(() -> {
+            textLabelGetFromClient.setText("OFFLINE");
+            textLabelGetFromClient.setTextFill(javafx.scene.paint.Color.web("#ff0000"));
+        });
     }
 }
