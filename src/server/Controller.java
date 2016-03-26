@@ -142,7 +142,7 @@ public class Controller implements Runnable {
     }
 
     public void run() {
-        serverLogArea.appendText("Messages - ONLINE.");
+        serverLogArea.appendText("\nMessages - ONLINE.");
         while (getFromClientSwitch) {
             try {
                 msg = getFromClient.readUTF();
@@ -167,6 +167,6 @@ public class Controller implements Runnable {
             textLabelGetFromClient.setText("OFFLINE");
             textLabelGetFromClient.setTextFill(javafx.scene.paint.Color.web("#ff0000"));
         });
-        serverLogArea.appendText("Messages - OFFLINE.");
+        serverLogArea.appendText("\nMessages - OFFLINE.");
     }
 }
