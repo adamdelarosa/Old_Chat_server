@@ -114,26 +114,6 @@ public class Controller implements Runnable {
         System.out.println("STATE: " + tofConnectionStatus);
     }
 
-/*    public void connectionLiveOrDead() {
-        threadConnectionDeadOrAlive = new Thread(() -> {
-            while (true) {
-                if (getFromClientSwitch) {
-                    Platform.runLater(() -> {
-                        textLabelGetFromClient.setText("ONLINE");
-                        textLabelGetFromClient.setTextFill(javafx.scene.paint.Color.web("#00FF00"));
-                    });
-                } else {
-                    Platform.runLater(() -> {
-                        textLabelGetFromClient.setText("OFFLINE");
-                        textLabelGetFromClient.setTextFill(javafx.scene.paint.Color.web("#00FF00"));
-                    });
-                }
-            }
-        });
-        threadConnectionDeadOrAlive.start();
-    }*/
-
-
     private void setSteams() throws IOException {
         sendToClient = new DataOutputStream(socketState.getOutputStream());
         sendToClient.flush();
