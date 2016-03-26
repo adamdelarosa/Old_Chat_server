@@ -40,10 +40,8 @@ public class Controller implements Runnable {
     private int port = 6789;
     private int numberOfConnetions = 100;
     private Thread iThread;
-    private Thread threadConnectionDeadOrAlive;
     private boolean getFromClientSwitch = false;
     private String msg;
-    private EOFException eofexceptionGetMessage;
 
     private ConnectionStatus classconnectionstatus;
 
@@ -56,7 +54,6 @@ public class Controller implements Runnable {
                 while (true) {
                     try {
                         serverSocketState();
-                      //  connectionLiveOrDead();
                         waitingForConnection();
                         setSteams();
                         getMessage();
