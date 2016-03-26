@@ -43,7 +43,6 @@ public class Controller implements Runnable {
     private Thread iThread;
     private boolean getFromClientSwitch = false;
     private String msg;
-
     private ConnectionStatus classconnectionstatus;
 
     public void connectToClient() {
