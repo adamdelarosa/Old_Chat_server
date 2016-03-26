@@ -17,7 +17,6 @@ public class ConnectionStatus implements Runnable {
         stopButton = stopbutton;
         onlineOfflineText = onlineofflinetext;
         serverLogArea = serverlogarea;
-
     }
 
     public void startConnecionStatusCheck() {

@@ -2,6 +2,7 @@ package server;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -69,7 +70,7 @@ public class Controller implements Runnable {
         });
         runAndConnectToClient.start();
         connectToClientText.setText("ONLINE");
-        connectToClientText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
+        connectToClientText.setTextFill(javafx.scene.paint.Color.web("#00FF00"));
     }
 
     public void serverSocketState(){
@@ -118,7 +119,7 @@ public class Controller implements Runnable {
         Platform.runLater(() -> {
             serverLogArea.appendText("\nClient connected.");
             setSteamsText.setText("ONLINE");
-            setSteamsText.setTextFill(javafx.scene.paint.Color.web("#0076a3"));
+            setSteamsText.setTextFill(javafx.scene.paint.Color.web("#00FF00"));
         });
     }
 
@@ -134,7 +135,6 @@ public class Controller implements Runnable {
             e.printStackTrace();
         }
     }
-
     private void getMessage() {
         getFromClientSwitch = true;
         iThread = new Thread(this);
