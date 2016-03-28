@@ -1,4 +1,5 @@
-package server;
+package server.HealthCheck;
+import server.Controller;
 
 import java.util.Date;
 
