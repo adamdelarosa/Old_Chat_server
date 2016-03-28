@@ -33,7 +33,6 @@ public class Controller implements Runnable {
     public Button connectionStatusStop;
     boolean tofConnectionStatus;
 
-
     private DataOutputStream sendToClient;
     private DataInputStream getFromClient;
     private ServerSocket serverSocketState;

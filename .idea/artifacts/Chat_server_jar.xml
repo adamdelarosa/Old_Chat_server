@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Chat_server:jar">
+    <output-path>/Applications/ChatServer.app/Contents/MacOS</output-path>
+    <root id="archive" name="Chat_server.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/k/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="Chat_server" />
+    </root>
+  </artifact>
+</component>
