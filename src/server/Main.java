@@ -1,4 +1,4 @@
-package server;
+package Server;
 
 import javafx.application.Application;
 import javafx.application.Platform;

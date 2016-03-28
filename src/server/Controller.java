@@ -1,4 +1,4 @@
-package server;
+package Server;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import server.HealthCheck.ConnectionStatus;
+import Server.HealthCheck.ConnectionStatus;
 
 import java.io.*;
 import java.net.BindException;
